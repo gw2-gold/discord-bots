@@ -1,0 +1,21 @@
+const { tab } = require('../constants')
+
+const donating = message => {
+  return [
+    '**Please only donate materials if you can spare them, it is not required to donate.**',
+    'If you do, it helps all of us and also, you in the long run by allowing us to upgrade our guild hall quicker.',
+    'Thank you to all that do help. To donate materials:',
+    `${tab}**1)** Enter the Guild Hall`,
+    `${tab}**2)** Talk to the NPC named Esa the Frugal next to the WP`,
+    `${tab.repeat(
+      2
+    )}- Left side will be the mats you can donate from your inventory`,
+    `${tab.repeat(
+      2
+    )}- Right side will be the mats we require and or already have.`,
+    `${tab}**3)** Double click on your mats on the left side or drag them over to the right top panel.`,
+    `${tab}**4)** Press Confirm.`
+  ]
+}
+
+module.exports = donating
