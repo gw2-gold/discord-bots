@@ -11,6 +11,7 @@ const missions = require('./message-handlers/missions')
 const ranks = require('./message-handlers/ranks')
 const recruiting = require('./message-handlers/recruiting')
 const rules = require('./message-handlers/rules')
+const sites = require('./message-handlers/sites')
 const time = require('./message-handlers/time')
 
 const { TOKEN } = process.env
@@ -44,6 +45,9 @@ bot.on('message', message => {
       break
     case '!rules':
       response = rules(message)
+      break
+    case '!sites':
+      response = sites(message)
       break
     case '!time':
       response = time(message)
