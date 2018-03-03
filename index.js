@@ -1,11 +1,21 @@
 // env
 require('dotenv').config()
 
+const fs = require('fs')
+const path = require('path')
+
 // discord
 const discord = require('discord.js')
 
+// utilities
+const cleanupEvents = require('./cleanup-events')
+const parseMessage = require('./parse-message')
+
 // message handlers
+const addEvent = require('./message-handlers/add-event')
+const deleteEvent = require('./message-handlers/delete-event')
 const donating = require('./message-handlers/donating')
+const events = require('./message-handlers/events')
 const help = require('./message-handlers/help')
 const missions = require('./message-handlers/missions')
 const ranks = require('./message-handlers/ranks')
@@ -23,12 +33,22 @@ bot.on('ready', () => {
 })
 
 bot.on('message', message => {
+  const [command, args] = parseMessage(message.content)
   let response
   let shouldPM = false
 
-  switch (message.content) {
+  switch (command) {
+    case '!addevent':
+      response = addEvent(message, args)
+      break
+    case '!deleteevent':
+      response = deleteEvent(message, args)
+      break
     case '!donating':
       response = donating(message)
+      break
+    case '!events':
+      response = events(message)
       break
     case '!help':
       response = help(message)
@@ -80,3 +100,27 @@ bot.on('guildMemberAdd', member => {
 })
 
 bot.login(TOKEN)
+
+ensureFilesExist()
+cleanup()
+
+// Run cleanup at start and then every 15 minutes
+function cleanup() {
+  cleanupEvents()
+
+  setTimeout(cleanup, 900000)
+}
+
+function ensureFilesExist() {
+  try {
+    fs.mkdirSync(path.join(__dirname, '/files'))
+  } catch (e) {
+    if (e.code !== 'EEXIST') {
+      console.log('something actually went wrong :(')
+    }
+  }
+
+  if (!fs.existsSync(path.join(__dirname, '/files/events.json'))) {
+    fs.writeFileSync(path.join(__dirname, '/files/events.json'), '[]')
+  }
+}
