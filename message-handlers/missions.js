@@ -4,15 +4,15 @@ const missions = message => {
   const now = moment().utc()
   const sunday = moment()
     .utc()
-    .hours(0)
+    .hours(1)
     .minutes(0)
     .seconds(0)
-    .day(7)
+    .day('Sunday')
 
   return [
     `${
       message.author
-    }, Guild Missions are every Saturday Evening [US/Can/Alaska], Sunday Morning [OcX/SEA] at 12:00AM server time.`,
+    }, Guild Missions are every Saturday Evening [US/Can/Alaska], Sunday Morning [OcX/SEA] at 1:00AM server time.`,
     `The next guild missions are in **${now.to(
       sunday,
       true
