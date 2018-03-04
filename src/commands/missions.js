@@ -1,6 +1,9 @@
 const moment = require('moment')
 
-const missions = message => {
+const description =
+  "I'll send you general time info about missions as well as how long it is until we next run guild missions"
+const shouldDM = false
+const fn = message => {
   const now = moment().utc()
   const sunday = moment()
     .utc()
@@ -35,4 +38,4 @@ const missions = message => {
   ]
 }
 
-module.exports = missions
+module.exports = { description, fn, shouldDM }

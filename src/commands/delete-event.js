@@ -3,7 +3,9 @@ const path = require('path')
 const moment = require('moment')
 const isOfficer = require('../is-officer')
 
-const deleteEvent = (message, args) => {
+const description = ''
+const shouldDM = false
+const fn = (message, args) => {
   if (!isOfficer(message.member)) {
     return [`You aren't an officer. You are not allowed to delete an event`]
   }
@@ -11,7 +13,7 @@ const deleteEvent = (message, args) => {
   const [title, ...eventDate] = args
   const date = moment.utc(eventDate.join(' '), 'MM/DD/YYYY hh:mma')
   const existingEventsJSON = fs.readFileSync(
-    path.join(__dirname, '../files/events.json')
+    path.join(__dirname, '../../files/events.json')
   )
   const existingEvents = JSON.parse(existingEventsJSON)
 
@@ -30,7 +32,7 @@ const deleteEvent = (message, args) => {
   existingEvents.splice(existingEventIndex, 1)
 
   fs.writeFileSync(
-    path.join(__dirname, '../files/events.json'),
+    path.join(__dirname, '../../files/events.json'),
     JSON.stringify(existingEvents)
   )
 
@@ -41,4 +43,4 @@ const deleteEvent = (message, args) => {
   ]
 }
 
-module.exports = deleteEvent
+module.exports = { description, fn, shouldDM }

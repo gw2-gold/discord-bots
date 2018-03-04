@@ -1,6 +1,9 @@
 const { tab } = require('../constants')
 
-const recruiting = message => {
+const description =
+  "I'll send you info about how to recruit for [GOLD] and some helpful questions to ask potential goldies"
+const shouldDM = false
+const fn = message => {
   return [
     'If you ware planning on recruiting for [GOLD], here is a template message that you can send into chat:',
     `${tab}__If you are NEW or RETURNING, Wealth of Heroes [GOLD] is recruiting.136 Members strong. Taking you into Elona, Maguuma and beyond! Need a guild? Whisper for invite!__`,
@@ -22,4 +25,4 @@ const recruiting = message => {
   ]
 }
 
-module.exports = recruiting
+module.exports = { description, fn, shouldDM }

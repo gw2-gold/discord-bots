@@ -1,4 +1,7 @@
-const ranks = message => {
+const description =
+  "I'll send you info about the guild ranks and a link for more details"
+const shouldDM = false
+const fn = message => {
   return [
     '**Grand Master**: Reserved for the Guild Leaders, Sakkuth and Zara.',
     '**High Councillor**: Senior Officer',
@@ -10,4 +13,4 @@ const ranks = message => {
   ]
 }
 
-module.exports = ranks
+module.exports = { description, fn, shouldDM }

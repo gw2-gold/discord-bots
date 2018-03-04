@@ -3,7 +3,9 @@ const path = require('path')
 const moment = require('moment')
 const isOfficer = require('../is-officer')
 
-const addEvent = (message, args) => {
+const description = ''
+const shouldDM = false
+const fn = (message, args) => {
   if (!isOfficer(message.member)) {
     return [`You aren't an officer. You are not allowed to create a new event`]
   }
@@ -22,7 +24,7 @@ const addEvent = (message, args) => {
   }
 
   const existingEventsJSON = fs.readFileSync(
-    path.join(__dirname, '../files/events.json')
+    path.join(__dirname, '../../files/events.json')
   )
   const existingEvents = JSON.parse(existingEventsJSON)
 
@@ -49,7 +51,7 @@ const addEvent = (message, args) => {
   const newEvents = existingEvents.concat([{ title, date }])
 
   fs.writeFileSync(
-    path.join(__dirname, '../files/events.json'),
+    path.join(__dirname, '../../files/events.json'),
     JSON.stringify(
       newEvents.sort((a, b) => {
         const aDate = moment.utc(a.date)
@@ -75,4 +77,8 @@ const addEvent = (message, args) => {
   ]
 }
 
-module.exports = addEvent
+module.exports = {
+  description,
+  fn,
+  shouldDM
+}

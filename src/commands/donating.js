@@ -1,8 +1,11 @@
 const { tab } = require('../constants')
 
-const donating = message => {
+const description =
+  "I'll tell you how to donate items toward guild hall improvements! Thanks! :smiley:"
+const shouldDM = false
+const fn = (message, args) => {
   return [
-    '**Please only donate materials if you can spare them, it is not required to donate.**',
+    `**Please only donate materials if you can spare them, it is not required to donate.**`,
     'If you do, it helps all of us and also, you in the long run by allowing us to upgrade our guild hall quicker.',
     'Thank you to all that do help. To donate materials:',
     `${tab}**1)** Enter the Guild Hall`,
@@ -18,4 +21,4 @@ const donating = message => {
   ]
 }
 
-module.exports = donating
+module.exports = { description, fn, shouldDM }

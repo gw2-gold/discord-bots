@@ -1,15 +1,28 @@
 const fs = require('fs')
 const path = require('path')
 const moment = require('moment')
+const getGuild = require('../get-guild')
 
-const events = message => {
+const description = ''
+const shouldDM = false
+const fn = message => {
   let json
   try {
-    json = fs.readFileSync(path.join(__dirname, '../files/events.json'))
+    json = fs.readFileSync(path.join(__dirname, '../../files/events.json'))
   } catch (e) {
-    return ['No events scheduled']
+    const guild = getGuild()
+    const admin = guild.members.find('nickname', 'jeff/deth')
+
+    return [
+      `Sorry! Something went wrong. Please contact ${admin} so he can fix me!`
+    ]
   }
   const events = JSON.parse(json || '[]')
+
+  if (events.length === 0) {
+    return ['No events scheduled']
+  }
+
   const currentDate = moment.utc()
   const response = ['Here is a list of upcoming events:', ,]
 
@@ -50,4 +63,4 @@ const events = message => {
   return response
 }
 
-module.exports = events
+module.exports = { description, fn, shouldDM }
