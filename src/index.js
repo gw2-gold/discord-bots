@@ -5,11 +5,14 @@ require('dotenv').config({ path: '../.env' })
 const fs = require('fs')
 const path = require('path')
 
+// the discord bot
 const bot = require('./bot')
 
 // utilities
 const cleanupEvents = require('./cleanup-events')
 const ensureFilesExist = require('./ensure-files-exist')
+
+// event handlers
 const onGuildMemberAdd = require('./on-guild-member-add')
 const onMessage = require('./on-message')
 

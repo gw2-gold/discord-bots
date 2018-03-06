@@ -4,8 +4,13 @@ const onGuildMemberAdd = member => {
   const isBot = member.user.bot
   const channel = member.guild.channels.find('name', 'general')
 
+  // If we can't find the channel, for some reason,
+  // or the message is from a bot, ignore it.
+  // We don't want to respond to ourselves or to other bots.
   if (!channel || isBot) return
 
+  // Send a message to everyone in #general to welcome the player
+  // and also ask the new person to check their DMs
   channel.send(
     `${member.guild.roles.find('name', '@everyone')} please welcome ${
       member.user
@@ -14,6 +19,8 @@ const onGuildMemberAdd = member => {
     } please check your DMs for a message from me!`
   )
 
+  // Send the new member a DM to welcome them and ask them to
+  // change their nickname to include their GW2 account name
   member.send([
     `Hey **${
       member.user.username

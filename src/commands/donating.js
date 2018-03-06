@@ -5,8 +5,10 @@ const description =
 const shouldDM = false
 const fn = (message, args) => {
   return [
-    `**Please only donate materials if you can spare them, it is not required to donate.**`,
-    'If you do, it helps all of us and also, you in the long run by allowing us to upgrade our guild hall quicker.',
+    `${
+      message.author
+    }, **Please only donate materials if you can spare them, it is not required to donate.**`,
+    'If you do, it helps all of us, including you, in the long run by allowing us to upgrade our guild hall quicker.',
     'Thank you to all that do help. To donate materials:',
     `${tab}**1)** Enter the Guild Hall`,
     `${tab}**2)** Talk to the NPC named Esa the Frugal next to the WP`,

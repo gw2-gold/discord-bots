@@ -1,8 +1,11 @@
 const regex = /[^\s"']+|"([^"]*)"|'([^']*)'/g
+const mentionsRegex = /<@.+?>/
 
 const parseMessage = message => {
   const [command, ...rest] = message.match(regex)
-  const args = rest.filter(arg => !/<@.+?>/.test(arg))
+  // Filter out the mentions. Mentions always start
+  // with `<@` and end with `>`. This is
+  const args = rest.filter(arg => !mentionsRegex.test(arg))
 
   return [command, args]
 }
