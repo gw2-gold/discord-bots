@@ -19,8 +19,17 @@ const onMessage = require('./on-message')
 const { TOKEN } = process.env
 
 bot.on('ready', () => {
+  const commands = Object.keys(require('./commands'))
+  let index = 0
   console.log('Connected')
   console.log(`Logged in as ${bot.user.tag}`)
+  setInterval(() => {
+    bot.user.setPresence({
+      game: { name: `!help | !${commands[index]}` }
+    })
+
+    index = index === commands.length - 1 ? 0 : index + 1
+  }, 15000)
 })
 bot.on('message', onMessage)
 bot.on('guildMemberAdd', onGuildMemberAdd)
