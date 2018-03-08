@@ -19,7 +19,9 @@ const onMessage = require('./on-message')
 const { TOKEN } = process.env
 
 bot.on('ready', () => {
-  const commands = Object.keys(require('./commands'))
+  const commands = Object.keys(require('./commands')).filter(
+    command => command !== 'help'
+  )
   let index = 0
   console.log('Connected')
   console.log(`Logged in as ${bot.user.tag}`)
