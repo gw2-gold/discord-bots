@@ -23,6 +23,10 @@ bot.on('ready', () => {
   let index = 0
   console.log('Connected')
   console.log(`Logged in as ${bot.user.tag}`)
+  bot.user.setPresence({
+    game: { name: `!help` }
+  })
+
   setInterval(() => {
     bot.user.setPresence({
       game: { name: `!help | !${commands[index]}` }
