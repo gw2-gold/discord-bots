@@ -1,20 +1,17 @@
 // env
-require('dotenv').config({ path: '../.env' })
-
-// node builtins
-const fs = require('fs')
-const path = require('path')
+import dotenv from 'dotenv'
+dotenv.config()
 
 // the discord bot
-const bot = require('./bot')
+import bot from './bot'
 
 // utilities
-const cleanupEvents = require('./cleanup-events')
-const ensureFilesExist = require('./ensure-files-exist')
+import cleanupEvents from './cleanup-events'
+import ensureFilesExist from './ensure-files-exist'
 
 // event handlers
-const onGuildMemberAdd = require('./on-guild-member-add')
-const onMessage = require('./on-message')
+import onGuildMemberAdd from './on-guild-member-add'
+import onMessage from './on-message'
 
 const { TOKEN } = process.env
 

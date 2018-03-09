@@ -1,9 +1,13 @@
-const moment = require('moment')
+// Types
+import { Command, Response } from '../common/types'
+import { Message } from 'discord.js'
+
+import moment from 'moment'
 
 const description =
   "I'll send you general time info about missions as well as how long it is until we next run guild missions"
 const shouldDM = false
-const fn = message => {
+const fn = (message: Message): Response => {
   const now = moment().utc()
   const sunday = moment()
     .utc()
@@ -38,4 +42,6 @@ const fn = message => {
   ]
 }
 
-module.exports = { description, fn, shouldDM }
+const command: Command = { description, fn, shouldDM }
+
+export default command

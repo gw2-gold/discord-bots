@@ -1,13 +1,17 @@
-const { tab } = require('../constants')
+// Types
+import { Command, Response } from '../common/types'
+import { Message } from 'discord.js'
+
+import { tab } from '../constants'
 
 const description =
   "I'll tell you how to donate items toward guild hall improvements! Thanks! :smiley:"
 const shouldDM = false
-const fn = (message, args) => {
+const fn = (message: Message): Response => {
   return [
     `${
       message.author
-    }, **Please only donate materials if you can spare them, it is not required to donate.**`,
+    }, **please only donate materials if you can spare them, it is not required to donate.**`,
     'If you do, it helps all of us, including you, in the long run by allowing us to upgrade our guild hall quicker.',
     'Thank you to all that do help. To donate materials:',
     `${tab}**1)** Enter the Guild Hall`,
@@ -23,4 +27,6 @@ const fn = (message, args) => {
   ]
 }
 
-module.exports = { description, fn, shouldDM }
+const command: Command = { description, fn, shouldDM }
+
+export default command

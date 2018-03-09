@@ -1,8 +1,13 @@
+// Types
+import { Command, Response } from '../common/types'
+import { Message } from 'discord.js'
+
 const description =
   "I'll send you info about the guild ranks and a link for more details"
 const shouldDM = false
-const fn = message => {
+const fn = (message: Message): Response => {
   return [
+    `${message.author}, here is a list of the guild ranks:`,
     '**Grand Master**: Reserved for the Guild Leaders, Sakkuth and Zara.',
     '**High Councillor**: Senior Officer',
     '**Knights Guard**: Junior Officer',
@@ -13,4 +18,6 @@ const fn = message => {
   ]
 }
 
-module.exports = { description, fn, shouldDM }
+const command: Command = { description, fn, shouldDM }
+
+export default command

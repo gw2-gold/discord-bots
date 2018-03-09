@@ -1,11 +1,15 @@
-const fs = require('fs')
-const path = require('path')
-const moment = require('moment')
-const isOfficer = require('../is-officer')
+// Types
+import { Command, Event, Response } from '../common/types'
+import { Message } from 'discord.js'
+
+import fs from 'fs'
+import path from 'path'
+import moment from 'moment'
+import isOfficer from '../is-officer'
 
 const description = ''
 const shouldDM = false
-const fn = (message, args) => {
+const fn = (message: Message, args: string[]): Response => {
   if (!isOfficer(message.member)) {
     return [`You aren't an officer. You are not allowed to create a new event`]
   }
@@ -23,14 +27,14 @@ const fn = (message, args) => {
     ]
   }
 
-  const existingEventsJSON = fs.readFileSync(
-    path.join(__dirname, '../../files/events.json')
-  )
-  const existingEvents = JSON.parse(existingEventsJSON)
+  const existingEventsString = fs
+    .readFileSync(path.join(__dirname, '../../files/events.json'))
+    .toString()
+  const existingEvents: Event[] = JSON.parse(existingEventsString)
 
   let eventAlreadyExists = false
 
-  existingEvents.forEach(event => {
+  existingEvents.forEach((event: Event) => {
     if (
       eventAlreadyExists ||
       (event.title === title &&
@@ -48,12 +52,14 @@ const fn = (message, args) => {
     ]
   }
 
-  const newEvents = existingEvents.concat([{ title, date }])
+  const newEvents: Event[] = existingEvents.concat([
+    { title, date: date.toJSON() }
+  ])
 
   fs.writeFileSync(
     path.join(__dirname, '../../files/events.json'),
     JSON.stringify(
-      newEvents.sort((a, b) => {
+      newEvents.sort((a: Event, b: Event) => {
         const aDate = moment.utc(a.date)
         const bDate = moment.utc(b.date)
 
@@ -77,8 +83,6 @@ const fn = (message, args) => {
   ]
 }
 
-module.exports = {
-  description,
-  fn,
-  shouldDM
-}
+const command: Command = { description, fn, shouldDM }
+
+export default command

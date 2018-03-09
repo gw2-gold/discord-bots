@@ -1,7 +1,7 @@
-const natural = require('natural')
-const commands = require('./commands')
+import natural from 'natural'
+import commands from './commands'
 
-const getSimilarCommand = command => {
+const getSimilarCommand = (command: string) => {
   const commandNames = Object.keys(commands)
   let closestMatch
   let closestMatchPercentage = 0
@@ -18,4 +18,4 @@ const getSimilarCommand = command => {
   return closestMatch
 }
 
-module.exports = getSimilarCommand
+export default getSimilarCommand

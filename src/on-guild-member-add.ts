@@ -1,8 +1,14 @@
+// Types
+import { GuildMember, TextChannel } from 'discord.js'
+
 const { tab } = require('./constants')
 
-const onGuildMemberAdd = member => {
+const onGuildMemberAdd = (member: GuildMember) => {
   const isBot = member.user.bot
-  const channel = member.guild.channels.find('name', 'general')
+  const channel: TextChannel = <TextChannel>member.guild.channels.find(
+    'name',
+    'general'
+  )
 
   // If we can't find the channel, for some reason,
   // or the message is from a bot, ignore it.
@@ -38,4 +44,4 @@ const onGuildMemberAdd = member => {
   ])
 }
 
-module.exports = onGuildMemberAdd
+export default onGuildMemberAdd

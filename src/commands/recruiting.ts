@@ -1,11 +1,17 @@
-const { tab } = require('../constants')
+// Types
+import { Command, Response } from '../common/types'
+import { Message } from 'discord.js'
+
+import { tab } from '../constants'
 
 const description =
   "I'll send you info about how to recruit for [GOLD] and some helpful questions to ask potential goldies"
 const shouldDM = false
-const fn = message => {
+const fn = (message: Message): Response => {
   return [
-    'If you ware planning on recruiting for [GOLD], here is a template message that you can send into chat:',
+    `${
+      message.author
+    }, if you ware planning on recruiting for [GOLD], here is a template message that you can send into chat:`,
     `${tab}__If you are NEW or RETURNING, Wealth of Heroes [GOLD] is recruiting.136 Members strong. Taking you into Elona, Maguuma and beyond! Need a guild? Whisper for invite!__`,
     'During the follow up, here are some required/recommended questions:',
     ,
@@ -25,4 +31,6 @@ const fn = message => {
   ]
 }
 
-module.exports = { description, fn, shouldDM }
+const command: Command = { description, fn, shouldDM }
+
+export default command

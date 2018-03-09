@@ -1,9 +1,14 @@
-const { tab } = require('../constants')
+// Types
+import { Command, Response } from '../common/types'
+import { Message } from 'discord.js'
+
+import { tab } from '../constants'
 
 const description = "I'll send you some helpful/relevant GW2 links!"
-const shouldDM = true
-const fn = message => {
+const shouldDM = false
+const fn = (message: Message): Response => {
   return [
+    `${message.author}, here are some help sites:`,
     '**Must Haves**',
     `${tab}- Everything you need to know about GW2: https://wiki.guildwars2.com/wiki/Main_Page`,
     `${tab}- An interactive map with world boss locations and more: http://gw2timer.com/`,
@@ -25,4 +30,6 @@ const fn = message => {
   ]
 }
 
-module.exports = { description, fn, shouldDM }
+const command: Command = { description, fn, shouldDM }
+
+export default command

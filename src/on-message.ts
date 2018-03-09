@@ -1,19 +1,22 @@
-const commands = require('./commands')
-const getSimilarCommand = require('./get-similar-command')
-const parseMessage = require('./parse-message')
+// Types
+import { Response } from './common/types'
+import { Message } from 'discord.js'
+
+import commands from './commands'
+import getSimilarCommand from './get-similar-command'
+import parseMessage from './parse-message'
 
 const { COMMAND_CHARACTER = '!' } = process.env
 
-const onMessage = message => {
+const onMessage = (message: Message) => {
   if (message.author.bot) {
     return
   }
 
   const parsedMessage = parseMessage(message.content)
-  let [command] = parsedMessage
-  const [, args] = parsedMessage
+  let [command, args]: [string, string[]] = parsedMessage
   const mentions = message.mentions ? message.mentions.users.array() : []
-  let prependedMessage = []
+  let prependedMessage: Response = []
 
   // If this message doesn't start with the COMMAND_CHARACTER,
   // just return, because we don't really care
@@ -41,7 +44,7 @@ const onMessage = message => {
   }
 
   const { fn, shouldDM } = commands[command]
-  const response = fn(message, args, mentions)
+  const response: Response = fn(message, args, mentions)
   const channel = shouldDM ? message.author : message.channel
 
   if (shouldDM && message.channel.type !== 'dm') {
@@ -55,4 +58,4 @@ const onMessage = message => {
   channel.send(prependedMessage.concat(response))
 }
 
-module.exports = onMessage
+export default onMessage
