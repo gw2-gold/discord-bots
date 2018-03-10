@@ -26,13 +26,16 @@ bot.on('ready', () => {
     game: { name: `!help` }
   })
 
-  setInterval(() => {
+  setPresence()
+  setInterval(setPresence, 15000)
+
+  function setPresence() {
     bot.user.setPresence({
       game: { name: `!help | !${commands[index]}` }
     })
 
     index = index === commands.length - 1 ? 0 : index + 1
-  }, 15000)
+  }
 })
 bot.on('message', onMessage)
 bot.on('guildMemberAdd', onGuildMemberAdd)

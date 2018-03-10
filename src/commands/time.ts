@@ -1,14 +1,16 @@
 // Types
-import { Command, Response } from '../common/types'
-import { Message } from 'discord.js'
+import { Command, Embed } from '../common/types'
 
 import moment from 'moment'
 
 const description = "I'll send you the current server time"
 const shouldDM = false
-const fn = (message: Message): Response => {
+const fn = (): Embed => {
   const m = moment().utc()
-  return [`${message.author}, the current server time is ${m.format('h:mmA')}`]
+
+  return {
+    title: `Current server time is ${m.format('h:mmA')}`
+  }
 }
 
 const command: Command = { description, fn, shouldDM }

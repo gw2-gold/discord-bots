@@ -1,3 +1,3 @@
-const tab: string = '    '
+const tab: string = '  '
 
 export { tab }

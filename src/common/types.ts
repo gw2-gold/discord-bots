@@ -1,8 +1,3 @@
-export interface Event {
-  date: string
-  title: string
-}
-
 export interface Command {
   description: string
   fn: Function
@@ -13,4 +8,23 @@ export interface Commands {
   [key: string]: Command
 }
 
-export interface Response extends Array<string | undefined> {}
+export interface Embed {
+  description?: string
+  fields?: EmbedField[]
+  footer?: EmbedFooter
+  title: string
+}
+
+export interface EmbedField {
+  name: string
+  value: string
+}
+
+export interface EmbedFooter {
+  text: string
+}
+
+export interface Event {
+  date: string
+  title: string
+}
