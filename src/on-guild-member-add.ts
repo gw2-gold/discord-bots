@@ -1,7 +1,8 @@
 // Types
 import { GuildMember, TextChannel } from 'discord.js'
+import { Embed } from './common/types'
 
-const { tab } = require('./constants')
+const { embedColor, tab } = require('./constants')
 
 const onGuildMemberAdd = (member: GuildMember) => {
   const isBot = member.user.bot
@@ -17,31 +18,45 @@ const onGuildMemberAdd = (member: GuildMember) => {
 
   // Send a message to everyone in #general to welcome the player
   // and also ask the new person to check their DMs
-  channel.send(
-    `${member.guild.roles.find('name', '@everyone')} please welcome ${
-      member.user
-    } to the family! ${
-      member.user
-    } please check your DMs for a message from me!`
-  )
+  channel.send({
+    embed: {
+      title: `Everyone, please welcome ${member.user.username} to the family!`,
+      description: `${
+        member.user.username
+      }, please check your DMs for a message from me!`,
+      color: embedColor
+    }
+  })
 
   // Send the new member a DM to welcome them and ask them to
   // change their nickname to include their GW2 account name
-  member.send([
-    `Hey **${
-      member.user.username
-    }**! We are really excited to have you in the [GOLD] family.`,
-    `In order to make it easier for everyone to get to know you, can you please follow the steps below to change your 'nickname' on the [GOLD] server:`,
-    `${tab}1) Click on the [GOLD] server from your list of severs on the left side of discord`,
-    `${tab}2) Click on the down arrow, next to where it says "Wealth of Heroes [GOLD] above the channels list`,
-    `${tab}3) Click "Change Nickname"`,
-    `${tab}You can change this to anything you want, as long as it includes your in-game account name.`,
-    `${tab}For instance, if your account name is **Leo.1234**, you could choose something like:`,
-    `${tab}${tab}- Leo.1234`,
-    `${tab}${tab}- Leo`,
-    `${tab}${tab}- A Name you Choose/Leo`,
-    `${tab}${tab}- A Name you Choose (Leo)`
-  ])
+  member.send({
+    embed: <Embed>{
+      title: `Welcome to the [GOLD] family ${member.user.username}!`,
+      description:
+        'In order to make it easier for everyone to get to know you, please follow the directions below to change your nickname?',
+      fields: [
+        {
+          name: 'Steps to change your nickname:',
+          value: [
+            `|${tab}Click the [GOLD] server from your list of servers on the left side of discord`,
+            `|${tab}Click the down arrow next to "Wealth of Heroes [GOLD]" above the channels list`,
+            `|${tab}Click "Change Nickname"`
+          ].join('\n')
+        },
+        {
+          name: 'Example nicknames for account name "Leo.1234"',
+          value: [
+            `|${tab}Leo.1234`,
+            `|${tab}Leo`,
+            `|${tab}A Name you Choose/Leo`,
+            `|${tab}A Name you Choose (Leo)`
+          ].join('\n')
+        }
+      ],
+      color: embedColor
+    }
+  })
 }
 
 export default onGuildMemberAdd

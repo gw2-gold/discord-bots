@@ -5,6 +5,7 @@ import { Message } from 'discord.js'
 import commands from './commands'
 import getSimilarCommand from './get-similar-command'
 import parseMessage from './parse-message'
+import { embedColor } from './constants'
 
 const { COMMAND_CHARACTER = '!' } = process.env
 
@@ -60,7 +61,7 @@ const onMessage = (message: Message) => {
   }
 
   channel.send({
-    embed: { ...response, color: 0xeec63a }
+    embed: { ...response, color: embedColor }
   })
 }
 

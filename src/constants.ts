@@ -1,3 +1,4 @@
 const tab: string = '  '
+const embedColor: number = 0xeec63a
 
-export { tab }
+export { embedColor, tab }
