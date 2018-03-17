@@ -6,10 +6,7 @@ import fs from 'fs'
 const commandNames = fs
   .readdirSync(__dirname)
   .map(command => command.slice(0, -3))
-  .filter(
-    command =>
-      !['add-event', 'delete-event', 'events', 'index'].includes(command)
-  )
+  .filter(command => command !== 'index')
 const commands: Commands = {}
 
 commandNames.forEach((commandName: string) => {

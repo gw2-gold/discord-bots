@@ -13,6 +13,7 @@ export interface Embed {
   fields?: EmbedField[]
   footer?: EmbedFooter
   title: string
+  url?: string
 }
 
 export interface EmbedField {

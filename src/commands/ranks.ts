@@ -6,9 +6,14 @@ const description =
 const shouldDM = false
 const fn = (): Embed => {
   return {
-    title: 'Grand Master',
-    description: 'Reserved for the Guild Leaders, Sakkuth and Zara',
+    title: 'Full Rank Details',
+    url:
+      'https://docs.google.com/document/d/1PZcuT8VsBJBkDQ3iEx19WP5SChymnCQBI-pTKKb-EB4',
     fields: [
+      {
+        name: 'Grand Master',
+        value: 'Reserved for the Guild Leaders, Sakkuth and Zara'
+      },
       {
         name: 'High Councillor',
         value: 'Senior Officer'
@@ -29,11 +34,7 @@ const fn = (): Embed => {
         name: 'Pilgrim',
         value: 'Inactive (2 months) members are placed here'
       }
-    ],
-    footer: {
-      text:
-        'More details can be found here:\nhttps://docs.google.com/document/d/1PZcuT8VsBJBkDQ3iEx19WP5SChymnCQBI-pTKKb-EB4'
-    }
+    ]
   }
 }
 
