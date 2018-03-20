@@ -23,7 +23,7 @@ const onReady = () => {
       game: { name: `!help | !${commandNames[index]}` }
     })
 
-    index = index === commands.length - 1 ? 0 : index + 1
+    index = index === commandNames.length - 1 ? 0 : index + 1
   }
 }
 
