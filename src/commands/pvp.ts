@@ -42,7 +42,6 @@ const fn = (): Embed => {
 
   // If the next day is has a PvP session
   if (schedule.includes(day + 1)) {
-    console.log('schedule includes day + 1')
     nextPvP = nextPvP.day(day + 1)
 
     return message(now, nextPvP)

@@ -8,30 +8,30 @@ const description =
 const shouldDM = false
 const fn = (): Embed => {
   const now = moment().utc()
-  const sunday = moment()
+  const saturday = moment()
     .utc()
     .hours(1)
     .minutes(0)
     .seconds(0)
-    .day('Sunday')
+    .day('Saturday')
 
-  if (now.isAfter(sunday)) {
-    if (now.diff(sunday, 'hours') < 2) {
+  if (now.isAfter(saturday)) {
+    if (now.diff(saturday, 'hours') < 2) {
       return {
-        title: `Guild missions started **${now.to(sunday)}**`,
+        title: `Guild missions started **${now.to(saturday)}**`,
         description:
-          'Guild Missions are every Saturday Evening [US/Can/Alaska], Sunday Morning [OcX/SEA] at 1:00AM server time.\n\n',
+          'Guild Missions are every Friday Evening [US/Can/Alaska], Saturday Morning [OcX/SEA] at 1:00AM server time.\n\n',
         footer: { text: 'You may be able to catch part of it if you hurry!' }
       }
     }
 
-    sunday.day(7)
+    saturday.day(6)
   }
 
   return {
-    title: `Guild Missions are ${now.to(sunday)}`,
+    title: `Guild Missions are ${now.to(saturday)}`,
     description:
-      'Guild Missions are every Saturday Evening [US/Can/Alaska], Sunday Morning [OcX/SEA] at 1:00AM server time.',
+      'Guild Missions are every Friday Evening [US/Can/Alaska], Saturday Morning [OcX/SEA] at 1:00AM server time.',
     footer: { text: 'Hopefully we will see you there!' }
   }
 }

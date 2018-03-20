@@ -536,12 +536,12 @@ director@1.2.7:
   resolved "https://registry.yarnpkg.com/director/-/director-1.2.7.tgz#bfd3741075fd7fb1a5b2e13658c5f4bec77736f3"
 
 discord.js@^11.3.0:
-  version "11.3.0"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-11.3.0.tgz#0d3e2ae12846e4e002bdbdfe3cb265e2bf24bf32"
+  version "11.3.2"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-11.3.2.tgz#3c4074c1cb1a4916582fb96ded5ffa1324411f95"
   dependencies:
-    long "^3.2.0"
-    prism-media "^0.0.1"
-    snekfetch "^3.6.1"
+    long "^4.0.0"
+    prism-media "^0.0.2"
+    snekfetch "^3.6.4"
     tweetnacl "^1.0.0"
     ws "^4.0.0"
 
@@ -1255,9 +1255,9 @@ lazy@~1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/lazy/-/lazy-1.0.11.tgz#daa068206282542c088288e975c297c1ae77b690"
 
-long@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/long/-/long-3.2.0.tgz#d821b7138ca1cb581c172990ef14db200b5c474b"
+long@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
 
 lowercase-keys@^1.0.0:
   version "1.0.0"
@@ -1665,9 +1665,9 @@ prettyjson@^1.1.2:
     colors "^1.1.2"
     minimist "^1.2.0"
 
-prism-media@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-0.0.1.tgz#a3425c9cabd50d1c6c02e543941a11895667bd10"
+prism-media@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-0.0.2.tgz#aa917b084576c4df6488e4ea8e7d6d44aed4b411"
 
 process-nextick-args@~2.0.0:
   version "2.0.0"
@@ -1945,7 +1945,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^2.0.0"
 
-snekfetch@^3.6.1:
+snekfetch@^3.6.4:
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/snekfetch/-/snekfetch-3.6.4.tgz#d13e80a616d892f3d38daae4289f4d258a645120"
 

@@ -1,7 +1,17 @@
+import { Emoji, ReactionEmoji } from 'discord.js'
+
 export interface Command {
   description: string
   fn: Function
   shouldDM: boolean
+}
+
+export interface CommandsWithSubCommands {
+  [key: string]: CommandWithSubCommand
+}
+
+export interface CommandWithSubCommand {
+  [key: string]: Command
 }
 
 export interface Commands {
@@ -17,6 +27,7 @@ export interface Embed {
 }
 
 export interface EmbedField {
+  inline?: boolean
   name: string
   value: string
 }
@@ -28,4 +39,13 @@ export interface EmbedFooter {
 export interface Event {
   date: string
   title: string
+}
+
+export interface RaidSignup {
+  emojis: (Emoji | ReactionEmoji)[]
+  name: string
+}
+
+export interface RaidSignups {
+  [key: string]: RaidSignup
 }
