@@ -1,10 +1,12 @@
+// Types
+import { CommandsWithSubCommands } from './common/types'
+
 import bot from './bot'
 
 const onReady = () => {
   const { commands, commandsWithSubCommands } = require('./commands')
-
   const commandNames = Object.keys(commands)
-    .concat(Object.keys(commandsWithSubCommands))
+    .concat(extractSubCommandNames(commandsWithSubCommands))
     .sort()
     .filter(command => command !== 'help')
 
@@ -28,3 +30,21 @@ const onReady = () => {
 }
 
 export default onReady
+
+function extractSubCommandNames(
+  commandsWithSubCommands: CommandsWithSubCommands
+): string[] {
+  const commandNames: string[] = []
+
+  Object.keys(commandsWithSubCommands).forEach(commandName => {
+    commandNames.push(commandName)
+
+    Object.keys(commandsWithSubCommands[commandName])
+      .filter(subCommandName => subCommandName !== 'index')
+      .forEach(subCommandName => {
+        commandNames.push(`${commandName} ${subCommandName}`)
+      })
+  })
+
+  return commandNames
+}

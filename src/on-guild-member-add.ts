@@ -19,7 +19,7 @@ const onGuildMemberAdd = (member: GuildMember) => {
   // Send a message to everyone in #general to welcome the player
   // and also ask the new person to check their DMs
   channel.send({
-    embed: {
+    embed: <Embed>{
       title: `Everyone, please welcome ${member.user.username} to the family!`,
       description: `${
         member.user.username

@@ -11,20 +11,16 @@ const { COMMAND_CHARACTER = '!' } = process.env
 const { commands, commandsWithSubCommands } = allCommands
 
 const onMessage = async (message: Message) => {
-  if (message.author.bot) {
+  // If this message is from a different bot (or us),
+  // or if it doesn't start with the COMMAND_CHARACTER,
+  // just return, because we don't really care
+  if (message.author.bot || !message.content.startsWith(COMMAND_CHARACTER)) {
     return
   }
 
   const parsedMessage = parseMessage(message.content)
   let [commandName, args]: [string, string[]] = parsedMessage
   const mentions = message.mentions ? message.mentions.users.array() : []
-  // let prependedMessage: Response = []
-
-  // If this message doesn't start with the COMMAND_CHARACTER,
-  // just return, because we don't really care
-  if (!commandName.startsWith(COMMAND_CHARACTER)) {
-    return
-  }
 
   // Remove the COMMAND_CHARACTER from the beginning of the string
   commandName = commandName.slice(1)
