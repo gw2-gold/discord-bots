@@ -4,13 +4,19 @@ import { Moment } from 'moment'
 
 import moment from 'moment'
 
+import getGuild from '../../get-guild'
+
 // Tuesday, Wednesday, Thursday, Friday
 const schedule = [2, 3, 4, 5]
 const message = (now: Moment, next: Moment) => {
+  const guild = getGuild()
+  const signupChannel = guild.channels.find('name', 'pvp-signup')
   return {
     title: `The next PvP session starts ${now.to(next)}`,
-    description:
-      'PvP sessions are at 12:00am Server Time and are about an hour and a half long.',
+    description: [
+      `To signup for PvP, go to ${signupChannel}`,
+      'PvP sessions are at 12:00am Server Time and are about an hour and a half long.'
+    ].join('\n\n'),
     fields: [
       {
         name: '[US/Can/Alaska]',

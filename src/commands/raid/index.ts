@@ -10,10 +10,10 @@ const shouldDM = false
 
 const fn = (): Embed => {
   const guild = getGuild()
-  const raidSignupChannel = guild.channels.find('name', 'raid-signup')
+  const signupChannel = guild.channels.find('name', 'raid-signup')
   const description = [
     'Raids are every Saturday Evening [US/Can/Alaska], Sunday Morning [OcX/SEA] at 1:00AM server time.',
-    `To signup for Raids, go to ${raidSignupChannel}`
+    `To signup for Raids, go to ${signupChannel}`
   ].join('\n\n')
   const now = moment().utc()
   const sunday = moment()
