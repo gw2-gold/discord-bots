@@ -1,40 +1,36 @@
 // Types
-import {
-  Commands,
-  CommandWithSubCommand,
-  CommandsWithSubCommands
-} from '../common/types'
+import { Commands } from '../common/types'
 
 import fs from 'fs'
 import path from 'path'
 
 const commandNames = fs.readdirSync(__dirname)
-const commandNamesWithoutSubCommands = commandNames
-  .filter(command => command.includes('.js') && command !== 'index.js')
-  .map(command => command.replace('.js', ''))
-const commandNamesWithSubCommands = commandNames.filter(
-  command => !command.includes('.js')
-)
-const commands: Commands = {}
-const commandsWithSubCommands: CommandsWithSubCommands = {}
 
-commandNamesWithoutSubCommands.forEach((commandName: string) => {
-  commands[commandName.replace('-', '')] = require(`./${commandName}`).default
-})
+const commands = getCommandModules(commandNames)
 
-commandNamesWithSubCommands.forEach(command => {
-  const subCommandNames = fs.readdirSync(path.join(__dirname, command))
-  const subCommands: CommandWithSubCommand = {}
+export default commands
 
-  subCommandNames.forEach(commandName => {
-    subCommands[commandName.replace('.js', '')] = require(path.join(
-      __dirname,
-      command,
-      commandName
-    )).default
-  })
+function getCommandModules(
+  commandNames: string[],
+  parentCommand: string = ''
+): Commands {
+  return commandNames.reduce((accumulator, commandName) => {
+    const hasSubCommands = !commandName.includes('.js')
+    commandName = commandName.replace('.js', '')
 
-  commandsWithSubCommands[command] = subCommands
-})
+    if (!hasSubCommands) {
+      return {
+        ...accumulator,
+        [commandName]: require(path.join(__dirname, parentCommand, commandName))
+          .default
+      }
+    }
 
-export = { commands, commandsWithSubCommands }
+    const subCommandNames = fs.readdirSync(path.join(__dirname, commandName))
+
+    return {
+      ...accumulator,
+      [commandName]: getCommandModules(subCommandNames, commandName)
+    }
+  }, {})
+}

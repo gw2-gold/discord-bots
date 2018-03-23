@@ -1,5 +1,5 @@
 // Types
-import { Command, Embed } from '../common/types'
+import { Command, Embed } from '../../common/types'
 import { Moment } from 'moment'
 
 import moment from 'moment'

@@ -15,7 +15,7 @@ export interface CommandWithSubCommand {
 }
 
 export interface Commands {
-  [key: string]: Command
+  [key: string]: Command | CommandWithSubCommand
 }
 
 export interface Embed {
@@ -41,11 +41,11 @@ export interface Event {
   title: string
 }
 
-export interface RaidSignup {
+export interface MemberSignup {
   emojis: (Emoji | ReactionEmoji)[]
   name: string
 }
 
-export interface RaidSignups {
-  [key: string]: RaidSignup
+export interface MemberSignups {
+  [key: string]: MemberSignup
 }

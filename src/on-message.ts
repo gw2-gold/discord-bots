@@ -1,14 +1,14 @@
 // Types
-import { Command, Embed } from './common/types'
+import { Command, Embed, CommandWithSubCommand } from './common/types'
 import { Message } from 'discord.js'
 
-import allCommands from './commands'
+import commands from './commands'
 import getSimilarCommand from './get-similar-command'
 import parseMessage from './parse-message'
 import { embedColor } from './constants'
+import commandHasSubCommand from './command-has-sub-command'
 
 const { COMMAND_CHARACTER = '!' } = process.env
-const { commands, commandsWithSubCommands } = allCommands
 
 const onMessage = async (message: Message) => {
   // If this message is from a different bot (or us),
@@ -27,7 +27,7 @@ const onMessage = async (message: Message) => {
 
   // If we don't have an exact match for the command that the user typed,
   // we can check for similar commands, in case they mistyped it
-  if (!commands[commandName] && !commandsWithSubCommands[commandName]) {
+  if (!commands[commandName]) {
     const similarCommand = getSimilarCommand(commandName)
     if (!similarCommand) {
       return
@@ -41,16 +41,13 @@ const onMessage = async (message: Message) => {
   let command: Command = <Command>{}
 
   if (commands[commandName]) {
-    command = commands[commandName]
+    command = <Command>commands[commandName]
   }
 
-  if (commandsWithSubCommands[commandName]) {
+  if (commandHasSubCommand(commands, commandName)) {
     const subCommand = args[0] || 'index'
 
-    if (
-      subCommand &&
-      !Object.keys(commandsWithSubCommands[commandName]).includes(subCommand)
-    ) {
+    if (!Object.keys(commands[commandName]).includes(subCommand)) {
       message.channel.send({
         embed: {
           title: "I don't understand that command",
@@ -62,7 +59,7 @@ const onMessage = async (message: Message) => {
       return
     }
 
-    command = commandsWithSubCommands[commandName][subCommand]
+    command = (<CommandWithSubCommand>commands[commandName])[subCommand]
   }
 
   if (!command) {
