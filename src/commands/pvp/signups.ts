@@ -4,7 +4,7 @@ import { Command } from '../../common/types'
 import createSignupCommand from '../../create-signup-command'
 
 const description =
-  "I'll send you the members that are currently signed up for the next, along with the classes/elite specs they are willing to play"
+  "I'll send you the members that are currently signed up for the next pvp session, along with the classes/elite specs they are willing to play"
 const shouldDM = false
 
 const channel = 'pvp-signup'
