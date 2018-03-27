@@ -1,10 +1,9 @@
 // Types
-import { Command, Embed } from '../../common/types'
+import { Command } from '../../common/types'
 import { Moment } from 'moment'
 
-import moment from 'moment'
-
 import getGuild from '../../get-guild'
+import createScheduleCommand from '../../create-schedule-command'
 
 // Tuesday, Wednesday, Thursday, Friday
 const schedule = [2, 3, 4, 5]
@@ -37,28 +36,7 @@ const message = (now: Moment, next: Moment) => {
 const description =
   "I'll send you general time info about PvP as well as how long it is until the next PvP session"
 const shouldDM = false
-const fn = (): Embed => {
-  const now = moment.utc()
-  const day = now.day()
-  let nextPvP = now
-    .clone()
-    .hours(0)
-    .minutes(0)
-    .seconds(0)
-
-  // If the next day is has a PvP session
-  if (schedule.includes(day + 1)) {
-    nextPvP = nextPvP.day(day + 1)
-
-    return message(now, nextPvP)
-  }
-
-  // If it isn't one of the above,
-  // the next PvP session is next Tuesday
-  nextPvP = nextPvP.day(9)
-
-  return message(now, nextPvP)
-}
+const fn = createScheduleCommand(0, 0, schedule, message)
 
 const command: Command = { description, fn, shouldDM }
 
