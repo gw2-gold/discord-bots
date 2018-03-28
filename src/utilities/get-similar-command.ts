@@ -1,8 +1,13 @@
 import natural from 'natural'
 import commands from '../commands'
 
-const getSimilarCommand = (command: string) => {
-  const commandNames = Object.keys(commands)
+const getSimilarCommand = (
+  command: string,
+  parentCommand?: string
+): string | undefined => {
+  const commandNames = Object.keys(
+    parentCommand ? commands[parentCommand] : commands
+  )
   let closestMatch
   let closestMatchPercentage = 0
 

@@ -45,18 +45,24 @@ const onMessage = async (message: Message) => {
   }
 
   if (commandHasSubCommand(commands, commandName)) {
-    const subCommand = args[0] || 'index'
+    let subCommand = args[0] || 'index'
+    const similarSubCommand = getSimilarCommand(subCommand, commandName)
+    const subCommands = Object.keys(commands[commandName])
 
-    if (!Object.keys(commands[commandName]).includes(subCommand)) {
-      message.channel.send({
-        embed: {
-          title: "I don't understand that command",
-          description: 'Try using the `!help` command',
-          color: embedColor
-        }
-      })
+    if (!subCommands.includes(subCommand)) {
+      if (!similarSubCommand) {
+        message.channel.send({
+          embed: {
+            title: "I don't understand that command",
+            description: 'Try using the `!help` command',
+            color: embedColor
+          }
+        })
 
-      return
+        return
+      }
+
+      subCommand = similarSubCommand
     }
 
     command = (<CommandWithSubCommand>commands[commandName])[subCommand]
