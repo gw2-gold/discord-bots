@@ -4,6 +4,7 @@ import { Moment } from 'moment'
 import moment from 'moment'
 
 import getGuild from '../utilities/get-guild'
+import getNamesForDays from '../utilities/get-names-for-days'
 
 const createMessage = (
   signupChannelName: string,
@@ -32,39 +33,11 @@ const createMessage = (
       fields: [
         {
           name: '[US/Can/Alaska]',
-          value:
-            schedule.reduce((prev, curr, currIndex, array) => {
-              const isTwoFromEnd = currIndex === array.length - 2
-              const isOneFromEnd = currIndex === array.length - 1
-
-              return (
-                prev +
-                moment
-                  .utc()
-                  .day(curr - 1)
-                  .format('dddd') +
-                (isTwoFromEnd ? ' and ' : '') +
-                (isOneFromEnd || isTwoFromEnd ? '' : ', ')
-              )
-            }, '') + ' Evening'
+          value: getNamesForDays(schedule, 'Evening', -1)
         },
         {
           name: '[OcX/SEA]',
-          value:
-            schedule.reduce((prev, curr, currIndex, array) => {
-              const isTwoFromEnd = currIndex === array.length - 2
-              const isOneFromEnd = currIndex === array.length - 1
-
-              return (
-                prev +
-                moment
-                  .utc()
-                  .day(curr)
-                  .format('dddd') +
-                (isTwoFromEnd ? ' and ' : '') +
-                (isOneFromEnd || isTwoFromEnd ? '' : ', ')
-              )
-            }, '') + ' Morning'
+          value: getNamesForDays(schedule, 'Evening')
         }
       ],
       footer: {

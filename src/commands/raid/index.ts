@@ -1,16 +1,14 @@
 // Types
 import { Command } from '../../common/types'
 
-import createMessage from '../../utilities/create-message'
 import createScheduleCommand from '../../utilities/create-schedule-command'
 
 // Sunday and Thursday
 const schedule = [0]
-const message = createMessage('fractal-signup', 'Raids', 1, 0, '', schedule)
 const description =
   "I'll send you general time info about Raids as well as how long it is until the next Raid"
 const shouldDM = false
-const fn = createScheduleCommand(1, 0, schedule, message)
+const fn = createScheduleCommand('raid-signup', 'Raids', 1, 0, schedule, '')
 
 const command: Command = { description, fn, shouldDM }
 
