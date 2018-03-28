@@ -1,7 +1,7 @@
 // Types
 import { Command, Embed } from '../common/types'
 
-import { tab } from '../constants'
+import { tab } from '../utilities/constants'
 
 const description = "I'll send you some helpful/relevant GW2 links!"
 const shouldDM = false

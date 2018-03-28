@@ -1,7 +1,7 @@
 // Types
 import { Command, Embed } from '../common/types'
 
-import { tab } from '../constants'
+import { tab } from '../utilities/constants'
 
 const description =
   "I'll tell you how to donate items toward guild hall improvements! Thanks! :smiley:"

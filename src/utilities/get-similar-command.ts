@@ -1,5 +1,5 @@
 import natural from 'natural'
-import commands from './commands'
+import commands from '../commands'
 
 const getSimilarCommand = (command: string) => {
   const commandNames = Object.keys(commands)

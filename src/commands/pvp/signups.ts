@@ -1,7 +1,7 @@
 // Types
 import { Command } from '../../common/types'
 
-import createSignupCommand from '../../create-signup-command'
+import createSignupCommand from '../../utilities/create-signup-command'
 
 const description =
   "I'll send you the members that are currently signed up for the next pvp session, along with the classes/elite specs they are willing to play"

@@ -1,4 +1,4 @@
-import { Command, Commands } from './common/types'
+import { Command, Commands } from '../common/types'
 
 const commandHasSubCommand = (commands: Commands, commandName: string) => {
   const command = commands[commandName]

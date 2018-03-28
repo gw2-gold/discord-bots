@@ -1,8 +1,8 @@
 // Types
 import { GuildMember, TextChannel } from 'discord.js'
-import { Embed } from './common/types'
+import { Embed } from '../common/types'
 
-const { embedColor, tab } = require('./constants')
+const { embedColor, tab } = require('../utilities/constants')
 
 const onGuildMemberAdd = (member: GuildMember) => {
   const isBot = member.user.bot

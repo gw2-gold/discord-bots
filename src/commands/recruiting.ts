@@ -1,7 +1,7 @@
 // Types
 import { Command, Embed } from '../common/types'
 
-import { tab } from '../constants'
+import { tab } from '../utilities/constants'
 
 const description =
   "I'll send you info about how to recruit for [GOLD] and some helpful questions to ask potential goldies"

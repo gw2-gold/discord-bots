@@ -1,5 +1,5 @@
 // Types
-import { Embed, MemberSignups } from './common/types'
+import { Embed, MemberSignups } from '../common/types'
 import { TextChannel } from 'discord.js'
 
 import getGuild from './get-guild'

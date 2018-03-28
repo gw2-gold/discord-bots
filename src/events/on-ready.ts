@@ -1,8 +1,8 @@
-import bot from './bot'
-import getAllCommandPaths from './get-all-command-paths'
+import bot from '../utilities/bot'
+import getAllCommandPaths from '../utilities/get-all-command-paths'
 
 const onReady = () => {
-  const commands = require('./commands').default
+  const commands = require('../commands').default
   const commandNames = getAllCommandPaths(commands)
     .map(commandName => commandName.replace('.index', '').replace('.', ' '))
     .sort()

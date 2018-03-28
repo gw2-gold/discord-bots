@@ -2,7 +2,7 @@
 import { Command, Embed, EmbedField } from '../common/types'
 
 import objectPath from 'object-path'
-import getAllCommandPaths from '../get-all-command-paths'
+import getAllCommandPaths from '../utilities/get-all-command-paths'
 
 const description =
   "I'll come to your aid and send you this message again, with any added/updated commands!"

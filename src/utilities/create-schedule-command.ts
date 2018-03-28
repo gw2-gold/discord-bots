@@ -1,5 +1,5 @@
 // Types
-import { Embed } from './common/types'
+import { Embed } from '../common/types'
 
 import moment from 'moment'
 import getNextScheduledDay from './get-next-scheduled-day'

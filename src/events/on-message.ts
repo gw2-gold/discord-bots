@@ -1,12 +1,12 @@
 // Types
-import { Command, Embed, CommandWithSubCommand } from './common/types'
+import { Command, Embed, CommandWithSubCommand } from '../common/types'
 import { Message } from 'discord.js'
 
-import commands from './commands'
-import getSimilarCommand from './get-similar-command'
-import parseMessage from './parse-message'
-import { embedColor } from './constants'
-import commandHasSubCommand from './command-has-sub-command'
+import commands from '../commands'
+import getSimilarCommand from '../utilities/get-similar-command'
+import parseMessage from '../utilities/parse-message'
+import { embedColor } from '../utilities/constants'
+import commandHasSubCommand from '../utilities/command-has-sub-command'
 
 const { COMMAND_CHARACTER = '!' } = process.env
 

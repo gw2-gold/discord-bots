@@ -1,4 +1,4 @@
-import { Commands } from './common/types'
+import { Commands } from '../common/types'
 
 const getAllCommandPaths = (commands: Commands): string[] => {
   return Object.keys(commands)
