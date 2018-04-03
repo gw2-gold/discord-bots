@@ -12,7 +12,8 @@ const createMessage = (
   startHours: number,
   startMinutes: number,
   extraMessage: string,
-  schedule: number[]
+  schedule: number[],
+  organizerTags: string[]
 ) => {
   return function(now: Moment, next: Moment) {
     const guild = getGuild()
@@ -21,6 +22,19 @@ const createMessage = (
       .utc()
       .hours(startHours)
       .minutes(startMinutes)
+    let footer = organizerTags
+      ? {
+          text: `Contact ${organizerTags
+            .map(organizerTag => {
+              const member = guild.members.find(
+                member => member.user.tag === organizerTag
+              )
+
+              return member.nickname || member.user.username
+            })
+            .join('/')} for more information`
+        }
+      : undefined
 
     return {
       title: `We next run ${type} ${now.to(next)}`,
@@ -37,12 +51,10 @@ const createMessage = (
         },
         {
           name: '[OcX/SEA]',
-          value: getNamesForDays(schedule, 'Evening')
+          value: getNamesForDays(schedule, 'Morning')
         }
       ],
-      footer: {
-        text: `Want to run ${type} outside of these times? Just ask in discord #general or in-game Guild chat`
-      }
+      footer
     }
   }
 }

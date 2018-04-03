@@ -5,14 +5,15 @@ import moment from 'moment'
 
 import createMessage from '../utilities/create-message'
 import getNextScheduledDay from './get-next-scheduled-day'
-// const message = createMessage('fractal-signup', 'Raids', 1, 0, '', schedule)
+
 const createScheduleCommand = (
   signupChannelName: string,
   type: string,
   startHour: number,
   startMinutes: number,
   schedule: number[],
-  extraMessage: string
+  extraMessage: string,
+  organizerTags: string[]
 ): Function => {
   const message = createMessage(
     signupChannelName,
@@ -20,7 +21,8 @@ const createScheduleCommand = (
     startHour,
     startMinutes,
     extraMessage,
-    schedule
+    schedule,
+    organizerTags
   )
   const fn = (): Embed => {
     const now = moment.utc()

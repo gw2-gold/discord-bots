@@ -8,18 +8,24 @@ import parseMessage from '../utilities/parse-message'
 import { embedColor } from '../utilities/constants'
 import commandHasSubCommand from '../utilities/command-has-sub-command'
 
-const { COMMAND_CHARACTER = '!' } = process.env
+// const { COMMAND_CHARACTER = '!' } = process.env
 
 const onMessage = async (message: Message) => {
-  // If this message is from a different bot (or us),
-  // or if it doesn't start with the COMMAND_CHARACTER,
-  // just return, because we don't really care
-  if (message.author.bot || !message.content.startsWith(COMMAND_CHARACTER)) {
+  // If this message is from a bot, we don't care about responding
+  if (message.author.bot) {
     return
   }
 
   const parsedMessage = parseMessage(message.content)
   let [commandName, args]: [string, string[]] = parsedMessage
+
+  // If we didn't parse a commandName out of the message,
+  // just return, because we don't really care
+  if (!commandName) {
+    return
+  }
+
+  // const parsedMessage = parseMessage(message.content)
   const mentions = message.mentions ? message.mentions.users.array() : []
 
   // Remove the COMMAND_CHARACTER from the beginning of the string

@@ -2,6 +2,7 @@
 import { Command } from '../../common/types'
 
 import createScheduleCommand from '../../utilities/create-schedule-command'
+import getOrganizersByType from '../../utilities/get-organizers-by-type'
 
 // Monday and Friday
 const schedule = [1, 5]
@@ -15,7 +16,8 @@ const fn = createScheduleCommand(
   1,
   0,
   schedule,
-  extraMessage
+  extraMessage,
+  getOrganizersByType('Fractal')
 )
 
 const command: Command = { description, fn, shouldDM }
