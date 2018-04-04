@@ -1,5 +1,10 @@
 import { Commands } from '../common/types'
 
+/**
+ * Given an object of commands, return the paths to their related module
+ * @param commands {Commands} A object of commands
+ * @returns {string[]}
+ */
 const getAllCommandPaths = (commands: Commands): string[] => {
   return Object.keys(commands)
     .filter(commandName => commandName !== 'index')

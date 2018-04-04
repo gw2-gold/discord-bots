@@ -8,8 +8,6 @@ import parseMessage from '../utilities/parse-message'
 import { embedColor } from '../utilities/constants'
 import commandHasSubCommand from '../utilities/command-has-sub-command'
 
-// const { COMMAND_CHARACTER = '!' } = process.env
-
 const onMessage = async (message: Message) => {
   // If this message is from a bot, we don't care about responding
   if (message.author.bot) {

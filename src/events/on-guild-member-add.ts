@@ -2,7 +2,9 @@
 import { GuildMember, TextChannel } from 'discord.js'
 import { Embed } from '../common/types'
 
-const { embedColor, tab } = require('../utilities/constants')
+import { stripIndent } from 'common-tags'
+
+const { embedColor } = require('../utilities/constants')
 
 const onGuildMemberAdd = (member: GuildMember) => {
   const isBot = member.user.bot
@@ -34,24 +36,24 @@ const onGuildMemberAdd = (member: GuildMember) => {
     embed: <Embed>{
       title: `Welcome to the [GOLD] family ${member.user.username}!`,
       description:
-        'In order to make it easier for everyone to get to know you, please follow the directions below to change your nickname?',
+        'In order to make it easier for everyone to get to know you, please follow the directions below to change your nickname',
       fields: [
         {
           name: 'Steps to change your nickname:',
-          value: [
-            `|${tab}Click the [GOLD] server from your list of servers on the left side of discord`,
-            `|${tab}Click the down arrow next to "Wealth of Heroes [GOLD]" above the channels list`,
-            `|${tab}Click "Change Nickname"`
-          ].join('\n')
+          value: stripIndent`
+            |  Click the [GOLD] server from your list of servers on the left side of discord
+            |  Click the down arrow next to "Wealth Of Heroes [GOLD]" above the channels list
+            |  Click "Change Nickname"
+          `
         },
         {
           name: 'Example nicknames for account name "Leo.1234"',
-          value: [
-            `|${tab}Leo.1234`,
-            `|${tab}Leo`,
-            `|${tab}A Name you Choose/Leo`,
-            `|${tab}A Name you Choose (Leo)`
-          ].join('\n')
+          value: stripIndent`
+            |  Leo.1234
+            |  Leo
+            |  A Name You Choose / Leo
+            |  A Name You Choose (Leo)
+          `
         }
       ],
       color: embedColor

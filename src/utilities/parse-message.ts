@@ -1,12 +1,16 @@
 const regex = /[^\s"']+|"([^"]*)"|'([^']*)'/g
 const mentionsRegex = /<@.+?>/g
 
+/**
+ * Given a messages contents, parse out the command and arguments
+ * @param message {string} The message contents
+ */
 const parseMessage = (message: string): [string, string[]] => {
   const messageWithoutMentions = message.replace(mentionsRegex, '')
   const matches: string[] = <string[]>messageWithoutMentions.match(regex)
 
   if (!matches) {
-    console.warn(`could not parse the message: ${message}`)
+    console.warn(`Unable to parse the message: ${message}`)
 
     return ['', ['']]
   }

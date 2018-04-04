@@ -16,16 +16,10 @@ const fn = (): Embed => {
   return {
     title: 'Here is a list of questions you can ask me',
     fields: getAllCommandPaths(commands).map(
-      (commandName: string): EmbedField => {
-        console.log(commandName, <Command>objectPath.get(
-          commands,
-          `${commandName}.description`
-        ))
-        return {
-          name: `!${commandName.replace('.index', '').replace('.', ' ')}`,
-          value: objectPath.get(commands, `${commandName}.description`)
-        }
-      }
+      (commandName: string): EmbedField => ({
+        name: `!${commandName.replace('.index', '').replace('.', ' ')}`,
+        value: objectPath.get(commands, `${commandName}.description`)
+      })
     )
   }
 }

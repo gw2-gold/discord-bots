@@ -2,7 +2,7 @@
 import { Command } from '../../common/types'
 
 import createScheduleCommand from '../../utilities/create-schedule-command'
-import getOrganizersByType from '../../utilities/get-organizers-by-type'
+import getOrganizersByGameType from '../../utilities/get-organizers-by-game-type'
 
 // Sunday and Thursday
 const schedule = [6]
@@ -16,7 +16,7 @@ const fn = createScheduleCommand(
   0,
   schedule,
   '',
-  getOrganizersByType('Guild Mission')
+  getOrganizersByGameType('Guild Mission')
 )
 
 const command: Command = { description, fn, shouldDM }

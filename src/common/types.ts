@@ -6,10 +6,6 @@ export interface Command {
   shouldDM: boolean
 }
 
-export interface CommandsWithSubCommands {
-  [key: string]: CommandWithSubCommand
-}
-
 export interface CommandWithSubCommand {
   [key: string]: Command
 }
@@ -34,11 +30,6 @@ export interface EmbedField {
 
 export interface EmbedFooter {
   text: string
-}
-
-export interface Event {
-  date: string
-  title: string
 }
 
 export interface MemberSignup {
