@@ -5,7 +5,7 @@ import { Moment } from 'moment'
  * @param schedule {number[]} An array of numbers, 0 (Sunday) - 6 (Saturday), each indicating a day of the week an even runs
  * @param now {Moment} A moment object representing the current time
  * @param nextTime {Moment} A moment object representing the time of the next day
- * @return {number}
+ * @returns number
  */
 const getNextScheduledDay = (
   schedule: number[],

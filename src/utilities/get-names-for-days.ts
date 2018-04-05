@@ -5,7 +5,7 @@ import moment from 'moment'
  * @param schedule {number[]} An array of numbers, each value from 0 (Sunday) to 6 (Saturday)
  * @param suffix {string} Suffix to end the string of day names with
  * @param shiftDayBy {number} A number indicating the amount of days to shift forward or backward. Useful if listing days in a different timezone
- * @return {string}
+ * @returns string
  */
 const getNamesForDays = (
   schedule: number[],

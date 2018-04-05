@@ -9,7 +9,7 @@ import getGuild from './get-guild'
  * @param channelName {string} A string indicating the channel to look in to find the signup message
  * @param noSignupsTitle {string} A title for the embed if there aren't any signups
  * @param title {string} A title for the embed if there are signups
- * @return {Function}
+ * @returns Function
  */
 const createSignupCommand = (
   channelName: string,

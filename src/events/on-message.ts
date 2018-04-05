@@ -55,14 +55,6 @@ const onMessage = async (message: Message) => {
 
     if (!subCommands.includes(subCommand)) {
       if (!similarSubCommand) {
-        message.channel.send({
-          embed: {
-            title: "I don't understand that command",
-            description: 'Try using the `!help` command',
-            color: embedColor
-          }
-        })
-
         return
       }
 

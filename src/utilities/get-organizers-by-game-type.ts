@@ -1,7 +1,7 @@
 /**
  * Given a game type, return the discord tags of the organizers
  @param gameType {string} A string indicating the game type. Allowed values: 'Fractals', 'Guild Missions', 'PvP', 'Raids'
- @return {string[]}
+ @returns string[]
  */
 const getOrganizersByGameType = (gameType: string): string[] => {
   const organizers =

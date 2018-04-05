@@ -14,7 +14,7 @@ import getNextScheduledDay from './get-next-scheduled-day'
  * @param schedule {number[]} An array of numbers, 0 (Sunday) - 6 (Saturday), each indicating a day of the week an even runs
  * @param extraMessage {string} A string indicating an extra message to be printed before the dates that get listed
  * @param organizerTags {string[]} An array of organizer discord tags to be put in the footer of the message
- * @return {Function}
+ * @returns Function
  */
 const createScheduleCommand = (
   signupChannelName: string,

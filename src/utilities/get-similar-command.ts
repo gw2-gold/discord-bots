@@ -5,7 +5,7 @@ import commands from '../commands'
  * Given a command name and an optional parent command name, get the most similar command
  * @param command {string} The name of the command to look for
  * @param parentCommand {string | undefined} The name of the parent command, if needed
- * @return {string}
+ * @returns string
  */
 const getSimilarCommand = (
   command: string,
