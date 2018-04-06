@@ -4,13 +4,6 @@ import { TextChannel } from 'discord.js'
 
 import getGuild from './get-guild'
 
-/**
- * Create a command that gets the signups for a particular game type
- * @param channelName {string} A string indicating the channel to look in to find the signup message
- * @param noSignupsTitle {string} A title for the embed if there aren't any signups
- * @param title {string} A title for the embed if there are signups
- * @returns Function
- */
 const createSignupCommand = (
   channelName: string,
   noSignupsTitle: string,

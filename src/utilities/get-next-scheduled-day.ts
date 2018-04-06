@@ -1,12 +1,5 @@
 import { Moment } from 'moment'
 
-/**
- * Given a schedule and the next time, find the next closest day in the schedule
- * @param schedule {number[]} An array of numbers, 0 (Sunday) - 6 (Saturday), each indicating a day of the week an even runs
- * @param now {Moment} A moment object representing the current time
- * @param nextTime {Moment} A moment object representing the time of the next day
- * @returns number
- */
 const getNextScheduledDay = (
   schedule: number[],
   now: Moment,

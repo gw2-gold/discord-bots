@@ -2,7 +2,6 @@
 import { Command } from '../../common/types'
 
 import createScheduleCommand from '../../utilities/create-schedule-command'
-import getOrganizersByGameType from '../../utilities/get-organizers-by-game-type'
 
 // Monday and Friday
 const schedule = [1, 5]
@@ -10,15 +9,14 @@ const extraMessage = '__For now, all scheduled days are for training__'
 const description =
   "I'll send you general time info about Fractals as well as how long it is until the next Fractal run"
 const shouldDM = false
-const fn = createScheduleCommand(
-  'fractal-signup',
-  'Fractals',
-  1,
-  0,
-  schedule,
+const fn = createScheduleCommand({
   extraMessage,
-  getOrganizersByGameType('Fractal')
-)
+  gameType: 'Fractals',
+  signupChannelName: 'fractal-signup',
+  schedule,
+  startHours: 1,
+  startMinutes: 0
+})
 
 const command: Command = { description, fn, shouldDM }
 
