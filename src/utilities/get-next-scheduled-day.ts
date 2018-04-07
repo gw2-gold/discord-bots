@@ -25,7 +25,7 @@ const getNextScheduledDay = (
     next = schedule[0]
   }
 
-  return next < now.day() ? next + 7 : next
+  return now.isAfter(nextTime.clone().day(next)) ? next + 7 : next
 }
 
 export default getNextScheduledDay
