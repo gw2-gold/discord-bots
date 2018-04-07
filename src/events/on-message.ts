@@ -49,19 +49,19 @@ const onMessage = async (message: Message) => {
   }
 
   if (commandHasSubCommand(commands, commandName)) {
-    let subCommand = args[0] || 'index'
-    const similarSubCommand = getSimilarCommand(subCommand, commandName)
+    let subCommandName = args[0] || 'index'
+    const similarSubCommand = getSimilarCommand(subCommandName, commandName)
     const subCommands = Object.keys(commands[commandName])
 
-    if (!subCommands.includes(subCommand)) {
-      if (!similarSubCommand) {
-        return
+    if (!subCommands.includes(subCommandName)) {
+      if (similarSubCommand) {
+        subCommandName = similarSubCommand
+      } else {
+        subCommandName = 'index'
       }
-
-      subCommand = similarSubCommand
     }
 
-    command = (<CommandWithSubCommand>commands[commandName])[subCommand]
+    command = (<CommandWithSubCommand>commands[commandName])[subCommandName]
   }
 
   if (!command) {
