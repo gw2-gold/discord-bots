@@ -15,17 +15,17 @@ const getNextScheduledDay = (
     }
 
     if (now.isBefore(nextDay)) {
-      next = nextDay.day()
+      next = nextDay
 
       break
     }
   }
 
   if (!next) {
-    next = schedule[0]
+    next = nextTime.clone().day(schedule[0])
   }
 
-  return now.isAfter(nextTime.clone().day(next)) ? next + 7 : next
+  return now.isAfter(next) ? next.day() + 7 : next.day()
 }
 
 export default getNextScheduledDay
