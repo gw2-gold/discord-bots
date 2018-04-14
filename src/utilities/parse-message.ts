@@ -1,20 +1,21 @@
-const regex = /[^\s"']+|"([^"]*)"|'([^']*)'/g
+const { COMMAND_CHARACTER } = process.env
+const commandRegex = new RegExp(`${'\\' + COMMAND_CHARACTER}\\w+`)
+const argsRegex = /[^\s"']+|"([^"]*)"|'([^']*)'/g
 const mentionsRegex = /<@.+?>/g
+
+console.log(commandRegex)
 
 const parseMessage = (message: string): [string, string[]] => {
   const messageWithoutMentions = message.replace(mentionsRegex, '')
-  const matches: string[] = <string[]>messageWithoutMentions.match(regex)
+  const command = (messageWithoutMentions.match(commandRegex) || [])[0]
+  const argString = messageWithoutMentions.replace(command, '')
+  const args: string[] = argString.match(argsRegex) || []
 
-  if (!matches) {
-    console.warn(`Unable to parse the message: ${message}`)
-
+  if (!command) {
     return ['', ['']]
   }
 
-  const [command, ...args] = matches
-  const ret: [string, string[]] = [command.toLowerCase(), args]
-
-  return ret
+  return [command.toLowerCase(), args]
 }
 
 export default parseMessage
