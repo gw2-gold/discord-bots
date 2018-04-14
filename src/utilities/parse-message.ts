@@ -3,8 +3,6 @@ const commandRegex = new RegExp(`${'\\' + COMMAND_CHARACTER}\\w+`)
 const argsRegex = /[^\s"']+|"([^"]*)"|'([^']*)'/g
 const mentionsRegex = /<@.+?>/g
 
-console.log(commandRegex)
-
 const parseMessage = (message: string): [string, string[]] => {
   const messageWithoutMentions = message.replace(mentionsRegex, '')
   const command = (messageWithoutMentions.match(commandRegex) || [])[0]
