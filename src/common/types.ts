@@ -40,3 +40,9 @@ export interface MemberSignup {
 export interface MemberSignups {
   [key: string]: MemberSignup
 }
+
+export interface ScheduledDay {
+  day: number
+  hour: number
+  minute: number
+}

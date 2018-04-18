@@ -1,22 +1,23 @@
 // Types
-import { Embed } from '../common/types'
+import { Embed, ScheduledDay } from '../common/types'
 
 import moment from 'moment'
 
 import createScheduleMessage from '../utilities/create-schedule-message'
 import getNextScheduledDay from './get-next-scheduled-day'
+import readFile from './read-file'
 
 const createScheduleCommand = ({
   extraMessage = '',
   gameType,
+  schedulePath,
   signupChannelName,
   startHours,
-  startMinutes,
-  schedule
+  startMinutes
 }: {
   extraMessage?: string
   gameType: string
-  schedule: number[]
+  schedulePath: string
   signupChannelName: string
   startHours: number
   startMinutes: number
@@ -24,21 +25,24 @@ const createScheduleCommand = ({
   const message = createScheduleMessage({
     extraMessage,
     gameType,
-    schedule,
+    schedulePath,
     signupChannelName,
     startHours,
     startMinutes
   })
   const fn = (): Embed => {
-    const now = moment.utc()
-    let next = now
-      .clone()
-      .hours(startHours)
-      .minutes(startMinutes)
-      .seconds(0)
-    const nextDay = getNextScheduledDay(schedule, now, next)
+    const {
+      schedule,
+      cancelledDates
+    }: { schedule: ScheduledDay[]; cancelledDates: string[] } = JSON.parse(
+      readFile(schedulePath) || '[]'
+    )
 
-    next = next.day(nextDay)
+    const now = moment.utc()
+    let next = now.clone()
+    next = getNextScheduledDay(schedule, cancelledDates, now, next)
+
+    // next = next.day(nextDay)
 
     return message(now, next)
   }

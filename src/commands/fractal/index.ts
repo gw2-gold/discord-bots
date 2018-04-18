@@ -4,7 +4,6 @@ import { Command } from '../../common/types'
 import createScheduleCommand from '../../utilities/create-schedule-command'
 
 // Monday and Friday
-const schedule = [1, 5]
 const extraMessage = '__For now, all scheduled days are for training__'
 const description =
   "I'll send you general time info about Fractals as well as how long it is until the next Fractal run"
@@ -13,7 +12,7 @@ const fn = createScheduleCommand({
   extraMessage,
   gameType: 'Fractals',
   signupChannelName: 'fractal-signup',
-  schedule,
+  schedulePath: '../../files/fractal-schedule.json',
   startHours: 1,
   startMinutes: 0
 })

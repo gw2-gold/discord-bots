@@ -1,40 +1,47 @@
 // Types
 import { Moment } from 'moment'
+import { ScheduledDay } from '../common/types'
 
 import moment from 'moment'
 
 import getGuild from '../utilities/get-guild'
 import getNamesForDays from '../utilities/get-names-for-days'
 import {
+  commaListsAnd,
   oneLineCommaListsAnd,
   oneLineCommaListsOr,
-  stripIndent
+  stripIndent,
+  stripIndents
 } from 'common-tags'
 import getMembersByRoleName from './get-members-by-role-name'
+import readFile from './read-file'
 
 const createScheduleMessage = ({
   extraMessage = '',
   gameType,
+  schedulePath,
   signupChannelName,
   startHours,
-  startMinutes,
-  schedule
+  startMinutes
 }: {
   signupChannelName: string
   gameType: string
+  schedulePath: string
   startHours: number
   startMinutes: number
   extraMessage: string
-  schedule: number[]
 }): Function => {
   return function(now: Moment, next: Moment) {
+    const {
+      schedule,
+      cancelledDates
+    }: { schedule: ScheduledDay[]; cancelledDates: string[] } = JSON.parse(
+      readFile(schedulePath) || '[]'
+    )
     const guild = getGuild()
     const signupChannel = guild.channels.find('name', signupChannelName)
     const organizers = getMembersByRoleName(`${gameType} Coordinator`)
-    const time = moment
-      .utc()
-      .hours(startHours)
-      .minutes(startMinutes)
+
     let footer = organizers
       ? {
           text: oneLineCommaListsOr`
@@ -47,23 +54,28 @@ const createScheduleMessage = ({
 
     return {
       title: `We next run ${gameType} ${now.to(next)}`,
-      description: stripIndent`
+      description: stripIndents`
         To signup for ${gameType}, go to ${signupChannel}
 
-        We run ${gameType} at ${time.format('h:mma')} Server Time
-
+        We run ${gameType} on the following days:
+        ${schedule
+          .map(
+            ({ day, hour, minute }) =>
+              '|  ' +
+              moment
+                .utc(`${day} ${hour}:${minute}`, 'd, h m')
+                .format('dddd [at] h:mma')
+          )
+          .join('\n')}
+        ${
+          cancelledDates.length > 0
+            ? `\nCancelled Dates:\n${cancelledDates
+                .map(date => '|  ' + moment.utc(date).format('dddd MM/DD'))
+                .join('\n')}\n`
+            : ''
+        }
         ${extraMessage ? extraMessage : ''}
       `,
-      fields: [
-        {
-          name: '[US/Can/Alaska]',
-          value: oneLineCommaListsAnd`${getNamesForDays(schedule, -1)} Evening`
-        },
-        {
-          name: '[OcX/SEA]',
-          value: oneLineCommaListsAnd`${getNamesForDays(schedule)} Morning`
-        }
-      ],
       footer
     }
   }

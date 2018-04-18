@@ -62,6 +62,7 @@ const onMessage = async (message: Message) => {
     }
 
     command = (<CommandWithSubCommand>commands[commandName])[subCommandName]
+    args.splice(0, 1)
   }
 
   if (!command) {
