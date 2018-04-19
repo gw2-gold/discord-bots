@@ -10,9 +10,7 @@ const shouldDM = false
 const fn = createScheduleCommand({
   gameType: 'Guild Missions',
   schedulePath: '../../files/mission-schedule.json',
-  signupChannelName: 'mission-signup',
-  startHours: 1,
-  startMinutes: 0
+  signupChannelName: 'mission-signup'
 })
 
 const command: Command = { description, fn, shouldDM }

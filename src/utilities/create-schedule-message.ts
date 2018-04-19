@@ -5,14 +5,7 @@ import { ScheduledDay } from '../common/types'
 import moment from 'moment'
 
 import getGuild from '../utilities/get-guild'
-import getNamesForDays from '../utilities/get-names-for-days'
-import {
-  commaListsAnd,
-  oneLineCommaListsAnd,
-  oneLineCommaListsOr,
-  stripIndent,
-  stripIndents
-} from 'common-tags'
+import { oneLineCommaListsOr, stripIndents } from 'common-tags'
 import getMembersByRoleName from './get-members-by-role-name'
 import readFile from './read-file'
 
@@ -20,16 +13,12 @@ const createScheduleMessage = ({
   extraMessage = '',
   gameType,
   schedulePath,
-  signupChannelName,
-  startHours,
-  startMinutes
+  signupChannelName
 }: {
-  signupChannelName: string
+  extraMessage: string
   gameType: string
   schedulePath: string
-  startHours: number
-  startMinutes: number
-  extraMessage: string
+  signupChannelName: string
 }): Function => {
   return function(now: Moment, next: Moment) {
     const {

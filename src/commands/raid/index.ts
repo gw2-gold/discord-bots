@@ -10,9 +10,7 @@ const shouldDM = false
 const fn = createScheduleCommand({
   gameType: 'Raids',
   schedulePath: '../../files/raid-schedule.json',
-  signupChannelName: 'raid-signup',
-  startHours: 1,
-  startMinutes: 0
+  signupChannelName: 'raid-signup'
 })
 
 const command: Command = { description, fn, shouldDM }

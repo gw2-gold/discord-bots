@@ -11,24 +11,18 @@ const createScheduleCommand = ({
   extraMessage = '',
   gameType,
   schedulePath,
-  signupChannelName,
-  startHours,
-  startMinutes
+  signupChannelName
 }: {
   extraMessage?: string
   gameType: string
   schedulePath: string
   signupChannelName: string
-  startHours: number
-  startMinutes: number
 }): Function => {
   const message = createScheduleMessage({
     extraMessage,
     gameType,
     schedulePath,
-    signupChannelName,
-    startHours,
-    startMinutes
+    signupChannelName
   })
   const fn = (): Embed => {
     const {

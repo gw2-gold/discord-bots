@@ -10,9 +10,7 @@ const shouldDM = false
 const fn = createScheduleCommand({
   gameType: 'PvP',
   schedulePath: '../../files/pvp-schedule.json',
-  signupChannelName: 'pvp-signup',
-  startHours: 0,
-  startMinutes: 0
+  signupChannelName: 'pvp-signup'
 })
 
 const command: Command = { description, fn, shouldDM }
