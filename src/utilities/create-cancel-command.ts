@@ -3,8 +3,9 @@ import { Message } from 'discord.js'
 
 import moment from 'moment'
 
-import isOfficer from '../utilities/is-officer'
 import ensureFileExists from '../utilities/ensure-file-exists'
+import getGuildMember from '../utilities/get-guild-member'
+import isOfficer from '../utilities/is-officer'
 import readFile from '../utilities/read-file'
 import writeFile from '../utilities/write-file'
 import scheduleCancelDeletion from './schedule-cancel-deletion'
@@ -20,7 +21,7 @@ const createCancelCommand = (
     .map(day => Number(day))
   const scheduleFilePath = `../../files/${gameType.toLowerCase()}-schedule.json`
   return (message: Message, [date]: [string]): Embed => {
-    if (!isOfficer(message.member)) {
+    if (!isOfficer(getGuildMember(message.author))) {
       return { title: 'Only Officers are allowed to cancel events' }
     }
 
