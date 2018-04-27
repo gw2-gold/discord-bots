@@ -14,7 +14,7 @@ import removeCancelledDate from './utilities/remove-cancelled-date'
 import scheduleCancelDeletion from './utilities/schedule-cancel-deletion'
 
 // ensure required files exist
-;['fractal', 'mission', 'pvp', 'raid'].forEach(type => {
+;['fractal', 'mission', 'pvp', 'raid', 'wvw'].forEach(type => {
   ensureFileExists(
     `../../files/${type}-schedule.json`,
     JSON.stringify({

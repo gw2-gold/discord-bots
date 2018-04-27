@@ -1,3 +1,6 @@
+// Types
+import { Command } from '../../common/types'
+
 import createUncancelCommand from '../../utilities/create-uncancel-command'
 
 const description =
@@ -5,4 +8,6 @@ const description =
 const shouldDM = false
 const fn = createUncancelCommand('Mission', 'Guild Missions')
 
-export default { description, fn, shouldDM }
+const command: Command = { description, fn, shouldDM }
+
+export default command
