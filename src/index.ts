@@ -55,6 +55,7 @@ import scheduleCancelDeletion from './utilities/schedule-cancel-deletion'
 
 // event handlers
 import onGuildMemberAdd from './events/on-guild-member-add'
+import onGuildMemberUpdate from './events/on-guild-member-update'
 import onMessage from './events/on-message'
 import onReady from './events/on-ready'
 
@@ -63,5 +64,6 @@ const { TOKEN } = process.env
 bot.on('ready', onReady)
 bot.on('message', onMessage)
 bot.on('guildMemberAdd', onGuildMemberAdd)
+bot.on('guildMemberUpdate', onGuildMemberUpdate)
 
 bot.login(TOKEN)
