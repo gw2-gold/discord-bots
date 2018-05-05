@@ -2,7 +2,7 @@
 import { Moment } from 'moment'
 import { ScheduledDay } from '../common/types'
 
-import moment from 'moment'
+import moment from 'moment-timezone'
 
 import getGuild from '../utilities/get-guild'
 import { oneLineCommaListsOr, stripIndents } from 'common-tags'
@@ -48,13 +48,21 @@ const createScheduleMessage = ({
 
         We run ${gameType} on the following days:
         ${schedule
-          .map(
-            ({ day, hour, minute }) =>
-              '|  ' +
-              moment
-                .utc(`${day} ${hour}:${minute}`, 'd, h m')
-                .format('dddd [at] h:mma')
-          )
+          .map(({ day, hour, minute }) => {
+            const utc = moment.utc(`${day} ${hour}:${minute}`, 'd, h m')
+            const aus = utc
+              .clone()
+              .tz('Australia/Brisbane')
+              .format('ddd')
+            const eastern = utc
+              .clone()
+              .tz('America/New_York')
+              .format('ddd')
+
+            return `| ${eastern} [US] / ${aus} [AU] at ${utc.format(
+              'h:mma'
+            )} ST`
+          })
           .join('\n')}
         ${
           cancelledDates.length > 0
