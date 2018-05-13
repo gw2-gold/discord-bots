@@ -27,7 +27,7 @@ const createUncancelCommand = (gameType: string) => {
 
     if (isPermanentlyCancelled) {
       return {
-        title: `Sadly, we have permanently cancelled ${gameTypeDisplayName} until further notice`
+        title: `Sadly, we have cancelled ${gameTypeDisplayName} until further notice`
       }
     }
 
