@@ -1,35 +1,43 @@
 // Types
 import { Moment } from 'moment'
-import { ScheduledDay } from '../common/types'
+import { Schedule } from '../common/types'
 
 import moment from 'moment-timezone'
 
+import getDisplayNameForGameType from '../utilities/get-display-name-for-game-type'
 import getGuild from '../utilities/get-guild'
 import { oneLineCommaListsOr, stripIndents } from 'common-tags'
 import getMembersByRoleName from './get-members-by-role-name'
-import readFile from './read-file'
+import getScheduleForGameType from './get-schedule-for-game-type'
 
 const createScheduleMessage = ({
   extraMessage = '',
   gameType,
-  schedulePath,
   signupChannelName
 }: {
   extraMessage: string
   gameType: string
-  schedulePath: string
   signupChannelName: string
 }): Function => {
   return function(now: Moment, next: Moment) {
+    const gameTypeDisplayName = getDisplayNameForGameType(gameType)
     const {
       schedule,
-      cancelledDates
-    }: { schedule: ScheduledDay[]; cancelledDates: string[] } = JSON.parse(
-      readFile(schedulePath) || '[]'
-    )
+      cancelledDates,
+      isPermanentlyCancelled
+    }: Schedule = getScheduleForGameType(gameType)
+
+    if (isPermanentlyCancelled) {
+      return {
+        title: `Sadly, we have cancelled ${gameTypeDisplayName} until further notice.`
+      }
+    }
+
     const guild = getGuild()
     const signupChannel = guild.channels.find('name', signupChannelName)
-    const organizers = getMembersByRoleName(`${gameType} Coordinator`)
+    const organizers = getMembersByRoleName(
+      `${gameTypeDisplayName} Coordinator`
+    )
 
     let footer = organizers
       ? {

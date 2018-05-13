@@ -1,25 +1,18 @@
-import { Embed, ScheduledDay } from '../common/types'
+import { Embed, Schedule } from '../common/types'
 import { Message } from 'discord.js'
 
 import moment from 'moment'
 
-import ensureFileExists from '../utilities/ensure-file-exists'
 import getGuildMember from '../utilities/get-guild-member'
+import getDisplayNameForGameType from '../utilities/get-display-name-for-game-type'
+import getScheduleForGameType from './get-schedule-for-game-type'
 import isOfficer from '../utilities/is-officer'
-import readFile from '../utilities/read-file'
-import writeFile from '../utilities/write-file'
 import scheduleCancelDeletion from './schedule-cancel-deletion'
+import changeScheduleForGameType from './change-schedule-for-game-type'
 
-const createCancelCommand = (
-  gameType: string,
-  gameTypeDisplay?: string
-): Function => {
-  const defaultSchedule = (
-    process.env[`DEFAULT_${gameType.toUpperCase()}_SCHEDULE`] || ''
-  )
-    .split(',')
-    .map(day => Number(day))
-  const scheduleFilePath = `../../files/${gameType.toLowerCase()}-schedule.json`
+const createCancelCommand = (gameType: string): Function => {
+  const gameTypeDisplayName = getDisplayNameForGameType(gameType)
+
   return (message: Message, [date]: [string]): Embed => {
     if (!isOfficer(getGuildMember(message.author))) {
       return { title: 'Only Officers are allowed to cancel events' }
@@ -41,14 +34,17 @@ const createCancelCommand = (
       }
     }
 
-    // Load schedule file
-    ensureFileExists(scheduleFilePath, JSON.stringify(defaultSchedule))
     const {
-      schedule,
-      cancelledDates
-    }: { schedule: ScheduledDay[]; cancelledDates: string[] } = JSON.parse(
-      readFile(scheduleFilePath) || '{}'
-    )
+      cancelledDates,
+      isPermanentlyCancelled,
+      schedule
+    }: Schedule = getScheduleForGameType(gameType)
+
+    if (isPermanentlyCancelled) {
+      return {
+        title: `We have already permanently cancelled ${gameTypeDisplayName}`
+      }
+    }
 
     // Get day number based on the day passed in
     const day = cancelledDate.day()
@@ -60,9 +56,7 @@ const createCancelCommand = (
 
     if (index === -1) {
       return {
-        title: `You provided me a day that we don't actually run ${
-          gameTypeDisplay ? gameTypeDisplay : gameType
-        }`
+        title: `You provided me a day that we don't actually run ${gameTypeDisplayName}`
       }
     }
 
@@ -71,29 +65,25 @@ const createCancelCommand = (
     // actually cancel event
     cancelledDates.push(cancelledDate.toJSON())
 
-    writeFile(
-      scheduleFilePath,
-      JSON.stringify({
-        schedule,
-        cancelledDates: cancelledDates.sort((a, b) => {
-          const c = moment(a)
-          const d = moment(b)
+    changeScheduleForGameType(gameType, {
+      cancelledDates: cancelledDates.sort((a, b) => {
+        const c = moment(a)
+        const d = moment(b)
 
-          if (d.isBefore(c)) return 1
-          if (c.isAfter(d)) return -1
+        if (d.isBefore(c)) return 1
+        if (c.isAfter(d)) return -1
 
-          return 0
-        })
+        return 0
       })
-    )
+    })
 
     scheduleCancelDeletion(gameType.toLowerCase(), cancelledDate.toJSON())
 
     // tell them that it was cancelled
     return {
-      title: `I have cancelled ${
-        gameTypeDisplay ? gameTypeDisplay : gameType
-      } for ${cancelledDate.format('MM/DD/YYYY')}`
+      title: `I have cancelled ${gameTypeDisplayName} for ${cancelledDate.format(
+        'MM/DD/YYYY'
+      )}`
     }
   }
 }

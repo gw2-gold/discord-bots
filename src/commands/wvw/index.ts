@@ -9,7 +9,6 @@ const description =
 const shouldDM = false
 const fn = createScheduleCommand({
   gameType: 'WvW',
-  schedulePath: '../../files/wvw-schedule.json',
   signupChannelName: 'wvw-signup'
 })
 

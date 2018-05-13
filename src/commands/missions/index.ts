@@ -8,8 +8,7 @@ const description =
   "I'll send you general time info about Guild Missions as well as how long it is until we next run Guild Missions"
 const shouldDM = false
 const fn = createScheduleCommand({
-  gameType: 'Guild Missions',
-  schedulePath: '../../files/mission-schedule.json',
+  gameType: 'Mission',
   signupChannelName: 'mission-signup'
 })
 

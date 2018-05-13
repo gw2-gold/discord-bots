@@ -1,20 +1,32 @@
 // Types
-import { Embed, MemberSignups } from '../common/types'
+import { Embed, MemberSignups, Schedule } from '../common/types'
 import { TextChannel } from 'discord.js'
 
 import getGuild from './get-guild'
+import getScheduleForGameType from './get-schedule-for-game-type'
+import getDisplayNameForGameType from './get-display-name-for-game-type'
 
 const createSignupCommand = (
-  channelName: string,
+  gameType: string,
   noSignupsTitle: string,
   title: string
 ): Function => {
   return async function fn(): Promise<Embed> {
+    const gameTypeDisplayName = getDisplayNameForGameType(gameType)
     const guild = getGuild()
+    const { isPermanentlyCancelled }: Schedule = getScheduleForGameType(
+      gameType
+    )
+
+    if (isPermanentlyCancelled) {
+      return {
+        title: `Sadly, we have cancelled ${gameTypeDisplayName} until further notice`
+      }
+    }
 
     const pvpSignupChannel: TextChannel = <TextChannel>guild.channels.find(
       'name',
-      channelName
+      `${gameType.toLowerCase()}-signup`
     )
     const messages = await pvpSignupChannel.fetchMessages()
     const pvpSignupMessage = messages.first()

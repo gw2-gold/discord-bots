@@ -3,13 +3,13 @@ import { Command } from '../../common/types'
 
 import createScheduleCommand from '../../utilities/create-schedule-command'
 
-// Tuesday, Wednesday, Thursday
+// Sunday and Thursday
 const description =
-  "I'll send you general time info about PvP as well as how long it is until the next PvP session"
+  "I'll send you general time info about Raids as well as how long it is until the next Raid"
 const shouldDM = false
 const fn = createScheduleCommand({
-  gameType: 'PvP',
-  signupChannelName: 'pvp-signup'
+  gameType: 'Raid',
+  signupChannelName: 'raid-signup'
 })
 
 const command: Command = { description, fn, shouldDM }

@@ -10,9 +10,8 @@ const description =
 const shouldDM = false
 const fn = createScheduleCommand({
   extraMessage,
-  gameType: 'Fractals',
-  signupChannelName: 'fractal-signup',
-  schedulePath: '../../files/fractal-schedule.json'
+  gameType: 'Fractal',
+  signupChannelName: 'fractal-signup'
 })
 
 const command: Command = { description, fn, shouldDM }

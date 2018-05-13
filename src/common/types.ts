@@ -41,6 +41,12 @@ export interface MemberSignups {
   [key: string]: MemberSignup
 }
 
+export interface Schedule {
+  schedule: ScheduledDay[]
+  cancelledDates: string[]
+  isPermanentlyCancelled: boolean
+}
+
 export interface ScheduledDay {
   day: number
   hour: number

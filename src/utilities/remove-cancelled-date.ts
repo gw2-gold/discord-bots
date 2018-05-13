@@ -1,16 +1,18 @@
-import readFile from './read-file'
-import writeFile from './write-file'
+// Types
+import { Schedule } from '../common/types'
 
-const removeCancelledDate = (type: string, cancelledDate: string) => {
-  const filePath = `../../files/${type}-schedule.json`
-  const file = JSON.parse(readFile(filePath) || '{}')
-  const index = file.cancelledDates.findIndex(
+import changeScheduleForGameType from './change-schedule-for-game-type'
+import getScheduleForGameType from './get-schedule-for-game-type'
+
+const removeCancelledDate = (gameType: string, cancelledDate: string) => {
+  const { cancelledDates }: Schedule = getScheduleForGameType(gameType)
+  const index = cancelledDates.findIndex(
     (date: string) => date === cancelledDate
   )
 
-  file.cancelledDates.splice(index, 1)
+  cancelledDates.splice(index, 1)
 
-  writeFile(filePath, JSON.stringify(file))
+  changeScheduleForGameType(gameType, { cancelledDates })
 }
 
 export default removeCancelledDate

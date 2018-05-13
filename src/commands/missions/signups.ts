@@ -7,11 +7,11 @@ const description =
   "I'll send you the members that are currently signed up for the next Guild Mission run, along with the classes/elite specs they are willing to play"
 const shouldDM = false
 
-const channel = 'mission-signup'
+const gameType = 'Mission'
 const noSignupsTitle = 'No on has signed up for the next Guild Mission run yet!'
 const title = 'Here are the current signups for the next Guild Mission run'
 
-const fn = createSignupCommand(channel, noSignupsTitle, title)
+const fn = createSignupCommand(gameType, noSignupsTitle, title)
 
 const command: Command = { description, fn, shouldDM }
 
