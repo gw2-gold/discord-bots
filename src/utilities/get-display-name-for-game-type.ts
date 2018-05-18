@@ -4,7 +4,7 @@ interface DisplayNameMap {
 
 const displayNames: DisplayNameMap = {
   Fractal: 'Fractals',
-  Missions: 'Guild Missions',
+  Mission: 'Guild Missions',
   PvP: 'PvP',
   Raid: 'Raids',
   WvW: 'WvW'
