@@ -50,11 +50,11 @@ const createScheduleMessage = ({
       : undefined
 
     return {
-      title: `We next run ${gameType} ${now.to(next)}`,
+      title: `We next run ${gameTypeDisplayName} ${now.to(next)}`,
       description: stripIndents`
-        To signup for ${gameType}, go to ${signupChannel}
+        To signup for ${gameTypeDisplayName}, go to ${signupChannel}
 
-        We run ${gameType} on the following days:
+        We run ${gameTypeDisplayName} on the following days:
         ${schedule
           .map(({ day, hour, minute }) => {
             const utc = moment.utc(`${day} ${hour}:${minute}`, 'd, h m')
