@@ -16,15 +16,15 @@ const changeScheduleForGameType = (
   )
     .split(',')
     .map(day => Number(day))
-  const scheduleFilePath = `../../files/${gameType.toLowerCase()}-schedule.json`
+  const scheduleFileName = `${gameType.toLowerCase()}-schedule.json`
 
   // Load schedule file
-  ensureFileExists(scheduleFilePath, JSON.stringify(defaultSchedule))
+  ensureFileExists(scheduleFileName, JSON.stringify(defaultSchedule))
 
   const schedule = getScheduleForGameType(gameType)
 
   writeFile(
-    scheduleFilePath,
+    scheduleFileName,
     JSON.stringify(Object.assign({}, schedule, changes))
   )
 }

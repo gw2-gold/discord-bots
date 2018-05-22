@@ -52,3 +52,9 @@ export interface ScheduledDay {
   hour: number
   minute: number
 }
+
+export interface ApiGuildMember {
+  name: string
+  rank: string
+  joined: string
+}

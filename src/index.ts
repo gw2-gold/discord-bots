@@ -16,7 +16,7 @@ import scheduleCancelDeletion from './utilities/schedule-cancel-deletion'
 // ensure required files exist
 ;['fractal', 'mission', 'pvp', 'raid', 'wvw'].forEach(type => {
   ensureFileExists(
-    `../../files/${type}-schedule.json`,
+    `${type}-schedule.json`,
     JSON.stringify({
       schedule: (process.env[`DEFAULT_${type.toUpperCase()}_SCHEDULE`] || '')
         .split(', ')
@@ -36,7 +36,7 @@ import scheduleCancelDeletion from './utilities/schedule-cancel-deletion'
   )
 
   const { cancelledDates }: { cancelledDates: string[] } = JSON.parse(
-    readFile(`../../files/${type}-schedule.json`) || '{}'
+    readFile(`${type}-schedule.json`) || '{}'
   )
 
   cancelledDates.forEach(cancelledDate => {

@@ -28,6 +28,12 @@
   dependencies:
     "@types/node" "*"
 
+"@types/node-fetch@^1.6.9":
+  version "1.6.9"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-1.6.9.tgz#a750fb0f4cf2960bf72b462e4c86908022dd69c5"
+  dependencies:
+    "@types/node" "*"
+
 "@types/node-schedule@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@types/node-schedule/-/node-schedule-1.2.2.tgz#bb5beae99b7327b4f2ddc1834f1fdae4378891b0"
@@ -42,6 +48,10 @@
 "@types/object-path@^0.9.29":
   version "0.9.29"
   resolved "https://registry.yarnpkg.com/@types/object-path/-/object-path-0.9.29.tgz#fca97eef86e8d78f3d5ada611b30289ec7cc90e8"
+
+"@types/pluralize@^0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@types/pluralize/-/pluralize-0.0.28.tgz#daf46f90fdaa6172600bfeac81e46065177f03ea"
 
 abbrev@1:
   version "1.1.1"
@@ -1502,6 +1512,10 @@ ncp@0.4.x:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-0.4.2.tgz#abcc6cbd3ec2ed2a729ff6e7c1fa8f01784a8574"
 
+node-fetch@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
+
 node-pre-gyp@^0.6.39:
   version "0.6.39"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.39.tgz#c00e96860b23c0e1420ac7befc5044e1d78d8649"
@@ -1737,6 +1751,10 @@ pkginfo@0.3.x:
 pkginfo@0.x.x:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.4.1.tgz#b5418ef0439de5425fc4995042dced14fb2a84ff"
+
+pluralize@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"

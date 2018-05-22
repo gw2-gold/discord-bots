@@ -10,12 +10,12 @@ const getScheduleForGameType = (gameType: string): Schedule => {
   )
     .split(',')
     .map(day => Number(day))
-  const scheduleFilePath = `../../files/${gameType.toLowerCase()}-schedule.json`
+  const scheduleFileName = `${gameType.toLowerCase()}-schedule.json`
 
   // Load schedule file
-  ensureFileExists(scheduleFilePath, JSON.stringify(defaultSchedule))
+  ensureFileExists(scheduleFileName, JSON.stringify(defaultSchedule))
 
-  const schedule: Schedule = JSON.parse(readFile(scheduleFilePath) || '{}')
+  const schedule: Schedule = JSON.parse(readFile(scheduleFileName) || '{}')
 
   return schedule
 }
