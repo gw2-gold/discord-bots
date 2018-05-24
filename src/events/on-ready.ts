@@ -1,7 +1,9 @@
 import bot from '../utilities/bot'
+import checkIfSquiresRequirePromotion from '../utilities/check-if-squires-require-promotion'
 import getAllCommandPaths from '../utilities/get-all-command-paths'
+import scheduler from 'node-schedule'
 
-const onReady = () => {
+const onReady = async () => {
   const commands = require('../commands').default
   const commandNames = getAllCommandPaths(commands)
     .map(commandName => commandName.replace('.index', '').replace('.', ' '))
@@ -14,6 +16,13 @@ const onReady = () => {
 
   setPresence()
   setInterval(setPresence, 15000)
+
+  await checkIfSquiresRequirePromotion()
+
+  // Check for squires requiring promotion every day at 8am
+  scheduler.scheduleJob('promotionCheck', '0 8 * * *', () => {
+    checkIfSquiresRequirePromotion()
+  })
 
   function setPresence() {
     bot.user.setPresence({

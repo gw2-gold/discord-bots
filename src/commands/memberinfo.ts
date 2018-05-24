@@ -2,15 +2,9 @@ import { ApiGuildMember, Command } from '../common/types'
 import { Message, GuildChannel } from 'discord.js'
 
 import moment from 'moment'
-import fetch from 'node-fetch'
 import getGuildMember from '../utilities/get-guild-member'
+import getInGameGuildMembers from '../utilities/get-in-game-guild-members'
 import isOfficer from '../utilities/is-officer'
-
-const { LEADER_TOKEN } = process.env
-
-if (!LEADER_TOKEN) {
-  throw new Error('LEADER_TOKEN is a required Environment Variable')
-}
 
 const description = 'I will look up a member in the guild by account name'
 const shouldDM = false
@@ -27,9 +21,7 @@ const fn = async (message: Message, [accountName]: [string]) => {
     }
   }
 
-  const data: ApiGuildMember[] = await fetch(
-    `https://api.guildwars2.com/v2/guild/0D74FD50-8CC6-E511-80D4-E4115BDFF975/members?access_token=${LEADER_TOKEN}`
-  ).then(response => response.json())
+  const data: ApiGuildMember[] = await getInGameGuildMembers()
 
   const apiMember = data.find(member => member.name === accountName)
 
