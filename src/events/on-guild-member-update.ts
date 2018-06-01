@@ -14,11 +14,12 @@ const onGuildMemberUpdate = (
   const guild = getGuild()
   const channel = <TextChannel>guild.channels.find('name', 'officers')
 
+  const oldName = oldMember.nickname || oldMember.user.username
+  const newName = newMember.nickname || newMember.user.username
+
   channel.send({
     embed: {
-      title: `${oldMember.nickname} changed their nickname to ${
-        newMember.nickname
-      }`,
+      title: `${oldName} changed their nickname to ${newName}`,
       color: embedColor
     }
   })
