@@ -57,7 +57,7 @@ const createScheduleMessage = ({
         We run ${gameTypeDisplayName} on the following days:
         ${schedule
           .map(({ day, hour, minute }) => {
-            const utc = moment.utc(`${day} ${hour}:${minute}`, 'd, h m')
+            const utc = moment.utc(`${day} ${hour}:${minute}`, 'd h:m')
             const aus = utc
               .clone()
               .tz('Australia/Brisbane')

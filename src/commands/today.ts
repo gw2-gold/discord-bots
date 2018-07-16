@@ -6,7 +6,7 @@ import getScheduleForGameType from '../utilities/get-schedule-for-game-type'
 import moment from 'moment-timezone'
 
 const description =
-  "I'll send you general time info about Raids as well as how long it is until the next Raid"
+  "I'll send you the events and their times for the next 24 hours"
 const fn = () => {
   let scheduledGameTypes: { [key: string]: ScheduledDay } = {}
   ;['Fractal', 'Mission', 'PvP', 'Raid', 'WvW'].forEach(gameType => {
@@ -17,9 +17,14 @@ const fn = () => {
       schedule
     } = getScheduleForGameType(gameType)
     const day = moment.utc().day()
-    const foundDay = schedule.find(scheduledDay => {
-      return scheduledDay.day === day
+    const foundDay = schedule.find(({ day, hour, minute }) => {
+      const now = moment.utc()
+      const nextEvent = moment.utc(`${day} ${hour}:${minute}`, 'd h:m')
+      const hoursUntilEvent = nextEvent.diff(now, 'hour')
+
+      return hoursUntilEvent >= 0 && hoursUntilEvent <= 24
     })
+
     const isCancelled = cancelledDates.find(dateString => {
       const date = moment.utc(dateString)
 
@@ -37,11 +42,11 @@ const fn = () => {
   })
 
   return {
-    title: 'Here is a list of events that are happening today',
+    title: 'Here is a list of events that are happening in the next 24 hours',
     description: Object.keys(scheduledGameTypes)
       .map((gameType: string) => {
         const { day, hour, minute } = scheduledGameTypes[gameType]
-        const utc = moment.utc(`${day} ${hour}:${minute}`, 'd, h m')
+        const utc = moment.utc(`${day} ${hour}:${minute}`, 'd h:m')
 
         return `| ${gameType} at ${utc.format('h:mma')} ST`
       })
