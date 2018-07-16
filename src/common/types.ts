@@ -41,7 +41,7 @@ export interface MemberSignups {
   [key: string]: MemberSignup
 }
 
-export interface Schedule {
+export interface Schedule extends Array<any> {
   schedule: ScheduledDay[]
   cancelledDates: string[]
   isPermanentlyCancelled: boolean
